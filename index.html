@@ -50,7 +50,7 @@
         }
         .content {
             margin-left: 200px; /* Offset for sidebar */
-            width: 100%;
+            width: 100vw; /* Fill viewport width */
             padding: 0 20px;
             box-sizing: border-box;
             min-width: 0; /* Prevent width overflow */
@@ -60,7 +60,7 @@
             color: #fff;
             text-align: center;
             padding: 80px 20px 50px;
-            width: 100%;
+            width: 100vw; /* Full viewport width */
             box-sizing: border-box;
         }
         .hero h2, .hero p, .hero a {
@@ -83,9 +83,7 @@
         }
         section {
             padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
+            width: 100%; /* Full width within content */
             box-sizing: border-box;
         }
         #problem {
@@ -119,7 +117,7 @@
             padding: 20px;
             margin-left: 200px; /* Align with content */
             box-sizing: border-box;
-            width: 100%;
+            width: 100%; /* Full width */
         }
         .lead-capture {
             background-color: #fff;
@@ -172,6 +170,13 @@
         .faq-question {
             font-weight: bold;
             color: #000000;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+        }
+        .faq-expand {
+            margin-left: 10px;
+            font-size: 1em;
             cursor: pointer;
         }
         .faq-answer {
@@ -264,9 +269,16 @@
             setActiveLink();
 
             faqQuestions.forEach(question => {
+                const expandButton = document.createElement('span');
+                expandButton.className = 'faq-expand';
+                expandButton.textContent = '+';
+                question.appendChild(expandButton);
+
                 question.addEventListener('click', function() {
                     const answer = this.nextElementSibling;
+                    const isActive = answer.classList.contains('active');
                     answer.classList.toggle('active');
+                    expandButton.textContent = isActive ? '+' : '−';
                 });
             });
         });
@@ -276,7 +288,7 @@
     <div class="sidebar">
         <ul>
             <li><a href="#problem">Problem</a></li>
-            <li><a href="#guide">Guide</a></li>
+            <li><a href="#guide">About Us</a></li>
             <li><a href="#plan">Plan</a></li>
             <li><a href="#cta">Contact</a></li>
             <li><a href="#faq">FAQ</a></li>
@@ -286,7 +298,7 @@
         <section class="hero">
             <img src="logo.png" alt="Alchemy Logo" class="hero-logo">
             <h2>A whole-of-society approach to keeping America safe with Untapped Power</h2>
-            <p>Alchemy is a catalyst that leverages all-source intelligence, venture capital investment, and whole-of-government integration to convert hundreds of billions in untapped capital into capabilities that win wars.</p>
+            <p>Alchemy is a catalyst that leverages all-source intelligence, venture capital investment, and whole-of-government integration to convert hundreds of billions of dollars per year in untapped capital into capabilities that win wars.</p>
             <a href="#cta" class="cta-button">Partner with Us</a>
         </section>
 
@@ -297,14 +309,14 @@
 
         <section id="guide">
             <h2>The Alchemists</h2>
-            <p>We are <a href="highland_bio.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="kenney_bio.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
+            <p>We are <a href="alchemy_blueprint.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="alchemy_blueprint.pdf" download>Maj Matt Anderson</a>, and <a href="alchemy_blueprint.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
         </section>
 
         <section id="plan">
             <h2>The Plan: Whole-of-Society Victory</h2>
             <ol>
                 <li><strong>Intelligence:</strong> Leverage all-source data from Defense Research Institutions and Military Intelligence Units to pinpoint gaps.</li>
-                <li><strong>Investment:</strong> Informs Venture Capital Firms into DoD prototypes for rapid innovation.</li>
+                <li><strong>Investment:</strong> Informs Venture Capital Firms into funding DoD prototypes for rapid innovation.</li>
                 <li><strong>Integration:</strong> Collaborate with Government Bodies and Military Leadership for seamless deployment.</li>
             </ol>
         </section>
@@ -325,7 +337,7 @@
             <h2>Frequently Asked Questions</h2>
             <div class="faq-item">
                 <div class="faq-question">What is Alchemy's primary goal?</div>
-                <div class="faq-answer">Alchemy aims to transform $311B in untapped venture capital into war-winning capabilities by leveraging intelligence, investment, and integration across defense, government, and private sectors.</div>
+                <div class="faq-answer">Alchemy aims to transform hundreds of billions of dollars per year in untapped venture capital into war-winning capabilities by leveraging intelligence, investment, and integration across defense, government, and private sectors.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">How does Alchemy benefit stakeholders?</div>
@@ -337,11 +349,15 @@
             </div>
             <div class="faq-item">
                 <div class="faq-question">What is the Blueprint about?</div>
-                <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for download.</div>
+                <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for <a href="alchemy_blueprint.pdf" download>download</a>.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">How can I get involved?</div>
-                <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or download the Blueprint and reach out to discuss collaboration opportunities.</div>
+                <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or <a href="alchemy_blueprint.pdf" download>download</a> the Blueprint and reach out to discuss collaboration opportunities.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">My organization already does something like this... how is Alchemy different?</div>
+                <div class="faq-answer">Alchemy stands out by integrating a whole-of-society approach, combining all-source intelligence, venture capital, and government resources into a unified strategy, offering a scalable model tailored to national defense needs unlike traditional isolated efforts.</div>
             </div>
         </section>
 
