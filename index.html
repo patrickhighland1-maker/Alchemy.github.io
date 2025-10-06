@@ -25,17 +25,10 @@
             justify-content: space-between;
             align-items: center;
         }
-        .logo {
-            width: 50px;
-            height: auto;
-            margin-right: 10px;
-        }
         header h1 {
             margin: 0;
             font-size: 1.5em;
-            display: flex;
-            align-items: center;
-            color: #ffd700; /* Ensure header text is visible */
+            color: #ffd700;
         }
         nav ul {
             list-style: none;
@@ -52,12 +45,17 @@
         }
         .hero {
             background-color: #1a1a1a;
-            color: #fff; /* Explicitly set white for all text */
+            color: #fff;
             text-align: center;
             padding: 150px 20px 100px;
         }
         .hero h2, .hero p, .hero a {
-            color: #fff; /* Ensure all elements in hero are white */
+            color: #fff;
+        }
+        .hero-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
         }
         .cta-button {
             background-color: #ffd700;
@@ -148,6 +146,16 @@
             height: 30px;
             margin-right: 5px;
             vertical-align: middle;
+            opacity: 0.5;
+        }
+        .af-generic, .vc-placeholder {
+            opacity: 1;
+        }
+        .vc-placeholder-text {
+            font-size: 24px;
+            color: #1a1a1a;
+            vertical-align: middle;
+            margin-right: 5px;
         }
         #download-link {
             display: none;
@@ -175,7 +183,6 @@
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Alchemy Logo" class="logo">
         <h1>Alchemy</h1>
         <nav>
             <ul>
@@ -188,6 +195,7 @@
     </header>
 
     <section class="hero">
+        <img src="logo.png" alt="Alchemy Logo" class="hero-logo">
         <h2>Keep America Safe with Untapped Power</h2>
         <p>Alchemy transforms $311B in venture capital into war-winning capabilities through intelligence and integration.</p>
         <a href="#cta" class="cta-button">Partner with Us</a>
@@ -206,9 +214,9 @@
     <section id="plan">
         <h2>The Plan: Whole-of-Society Victory</h2>
         <ol>
-            <li><strong>Intelligence:</strong> Leverage all-source data from <img src="https://www.airuniversity.af.edu/Portals/10/CASI/images/logo.png" alt="CASI Logo" class="logo-img"><a href="https://www.airuniversity.af.edu/CASI/" target="_blank">China Aerospace Studies Institute</a> and <img src="https://www.pacaf.af.mil/Portals/8/images/logo.png" alt="PACAF Logo" class="logo-img"><a href="https://www.pacaf.af.mil/" target="_blank">PACAF/A2</a> to pinpoint gaps.</li>
-            <li><strong>Investment:</strong> Direct <img src="https://www.8vc.com/logo.png" alt="8VC Logo" class="logo-img"><a href="https://www.8vc.com/" target="_blank">8VC</a> and <img src="https://shieldcap.com/logo.png" alt="Shield Capital Logo" class="logo-img"><a href="https://shieldcap.com/" target="_blank">Shield Capital</a> into DoD prototypes for rapid innovation.</li>
-            <li><strong>Integration:</strong> Collaborate with <img src="https://www.congress.gov/logo.png" alt="Congress Logo" class="logo-img"><a href="https://www.congress.gov/" target="_blank">Congress</a> and the <img src="https://www.jcs.mil/Portals/36/Images/jcs-seal.png" alt="JCS Logo" class="logo-img"><a href="https://www.jcs.mil/" target="_blank">Chairman of the Joint Chiefs of Staff</a> for seamless deployment.</li>
+            <li><strong>Intelligence:</strong> Leverage all-source data from <img src="https://www.af.mil/favicon.ico" alt="CASI Logo" class="logo-img af-generic"><a href="https://www.airuniversity.af.edu/CASI/" target="_blank">China Aerospace Studies Institute</a> and <img src="https://www.af.mil/favicon.ico" alt="PACAF Logo" class="logo-img af-generic"><a href="https://www.pacaf.af.mil/" target="_blank">PACAF/A2</a> to pinpoint gaps.</li>
+            <li><strong>Investment:</strong> Direct <span class="vc-placeholder-text">$</span><a href="https://www.8vc.com/" target="_blank">8VC</a> and <span class="vc-placeholder-text">$</span><a href="https://shieldcap.com/" target="_blank">Shield Capital</a> into DoD prototypes for rapid innovation.</li>
+            <li><strong>Integration:</strong> Collaborate with <img src="https://www.congress.gov/favicon.ico" alt="Congress Logo" class="logo-img"><a href="https://www.congress.gov/" target="_blank">Congress</a> and the <img src="https://www.af.mil/favicon.ico" alt="CJCS Logo" class="logo-img af-generic"><a href="https://www.jcs.mil/" target="_blank">Chairman of the Joint Chiefs of Staff</a> for seamless deployment.</li>
         </ol>
         <h3>Key Stakeholders</h3>
         <table class="stakeholder-table">
@@ -220,19 +228,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td><img src="https://www.airuniversity.af.edu/Portals/10/CASI/images/logo.png" alt="CASI Logo" class="logo-img"><a href="https://www.airuniversity.af.edu/CASI/" target="_blank">China Aerospace Studies Institute</a></td><td><img src="https://www.8vc.com/logo.png" alt="8VC Logo" class="logo-img"><a href="https://www.8vc.com/" target="_blank">8VC</a></td><td><img src="https://www.congress.gov/logo.png" alt="Congress Logo" class="logo-img"><a href="https://www.congress.gov/" target="_blank">Congress</a></td></tr>
-                <tr><td><img src="https://www.ustaiwandefense.com/logo.png" alt="Taiwan Defense Group Logo" class="logo-img"><a href="https://www.ustaiwandefense.com/" target="_blank">Taiwan Defense Group</a></td><td><img src="https://shieldcap.com/logo.png" alt="Shield Capital Logo" class="logo-img"><a href="https://shieldcap.com/" target="_blank">Shield Capital</a></td><td><img src="https://www.jcs.mil/Portals/36/Images/jcs-seal.png" alt="CJCS Logo" class="logo-img"><a href="https://www.jcs.mil/" target="_blank">Chairman of the Joint Chiefs of Staff (CJCS)</a></td></tr>
-                <tr><td><img src="https://www.pacaf.af.mil/Portals/8/images/logo.png" alt="PACAF Logo" class="logo-img"><a href="https://www.pacaf.af.mil/" target="_blank">PACAF/A2</a></td><td><img src="https://www.j2vp.com/logo.png" alt="J2 Capital Logo" class="logo-img"><a href="https://www.j2vp.com/" target="_blank">J2 Capital</a></td><td><img src="https://www.defense.gov/Portals/1/features/2023/depsecdef/logo.png" alt="Dep SecWar Logo" class="logo-img"><a href="https://www.defense.gov/About/Deputy-Secretary-of-Defense/" target="_blank">Deputy Secretary of War (Dep SecWar)</a></td></tr>
-                <tr><td><img src="https://www.nasic.af.mil/Portals/19/images/logo.png" alt="NASIC Logo" class="logo-img"><a href="https://www.nasic.af.mil/" target="_blank">NASIC</a></td><td><img src="https://www.hermeus.com/logo.svg" alt="Hermeus Logo" class="logo-img"><a href="https://www.hermeus.com/" target="_blank">Hermeus</a></td><td><img src="https://www.afmc.af.mil/Portals/12/documents/logo.png" alt="AFMC Logo" class="logo-img"><a href="https://www.afmc.af.mil/" target="_blank">Air Force Materiel Command (AFMC/CC)</a></td></tr>
-                <tr><td><img src="https://www.af.mil/logo.png" alt="Checkmate Logo" class="logo-img"><a href="https://www.af.mil/News/Article-Display/Article/126656/checkmate-strategic-studies-group-supports-leaders/" target="_blank">Checkmate</a></td><td></td><td><img src="https://www.aflcmc.af.mil/Portals/12/images/logo.png" alt="AFLCMC Logo" class="logo-img"><a href="https://www.aflcmc.af.mil/" target="_blank">Air Force Life Cycle Management Center (AFMCLC/CC)</a></td></tr>
-                <tr><td><img src="https://www.ssg.com.au/logo.png" alt="Strategic Studies Group Logo" class="logo-img"><a href="https://www.ssg.com.au/" target="_blank">Strategic Studies Group</a></td><td></td><td><img src="https://asc.army.mil/web/peos/logo.png" alt="PEOs Logo" class="logo-img"><a href="https://asc.army.mil/web/peos/" target="_blank">Program Executive Officers (PEOs)</a></td></tr>
-                <tr><td><img src="https://www.diu.mil/logo.png" alt="DIU Logo" class="logo-img"><a href="https://www.diu.mil/" target="_blank">DIU</a></td><td></td><td><img src="https://www.af.mil/logo.png" alt="SMLs Logo" class="logo-img"><a href="https://www.af.mil/About-Us/Air-Force-Senior-Leaders/" target="_blank">Senior Materiel Leaders (SMLs)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.af.mil/logo.png" alt="MLs Logo" class="logo-img"><a href="https://www.af.mil/About-Us/Air-Force-Senior-Leaders/" target="_blank">Materiel Leaders (MLs)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.dau.edu/glossary/logo.png" alt="SPOs Logo" class="logo-img"><a href="https://www.dau.edu/glossary/system-program-office" target="_blank">System Program Offices (SPOs)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.diu.mil/logo.png" alt="DIU Logo" class="logo-img"><a href="https://www.diu.mil/" target="_blank">Defense Innovation Unit (DIU)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://afwerx.com/logo.png" alt="AFWERX Logo" class="logo-img"><a href="https://afwerx.com/" target="_blank">AFWERX</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.cto.mil/osc/logo.png" alt="OSC Logo" class="logo-img"><a href="https://www.cto.mil/osc/" target="_blank">Office of Strategic Capital (OSC)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.afrl.af.mil/Portals/94/images/logo.png" alt="AFRL Logo" class="logo-img"><a href="https://www.afrl.af.mil/" target="_blank">Labs (AFRL, National, UARCs, FFRDCs, etc)</a></td></tr>
+                <tr><td><img src="https://www.af.mil/favicon.ico" alt="CASI Logo" class="logo-img af-generic"><a href="https://www.airuniversity.af.edu/CASI/" target="_blank">China Aerospace Studies Institute</a></td><td><span class="vc-placeholder-text">$</span><a href="https://www.8vc.com/" target="_blank">8VC</a></td><td><img src="https://www.congress.gov/favicon.ico" alt="Congress Logo" class="logo-img"><a href="https://www.congress.gov/" target="_blank">Congress</a></td></tr>
+                <tr><td><img src="https://www.af.mil/favicon.ico" alt="Taiwan Defense Group Logo" class="logo-img af-generic"><a href="https://www.ustaiwandefense.com/" target="_blank">Taiwan Defense Group</a></td><td><span class="vc-placeholder-text">$</span><a href="https://shieldcap.com/" target="_blank">Shield Capital</a></td><td><img src="https://www.af.mil/favicon.ico" alt="CJCS Logo" class="logo-img af-generic"><a href="https://www.jcs.mil/" target="_blank">Chairman of the Joint Chiefs of Staff (CJCS)</a></td></tr>
+                <tr><td><img src="https://www.af.mil/favicon.ico" alt="PACAF Logo" class="logo-img af-generic"><a href="https://www.pacaf.af.mil/" target="_blank">PACAF/A2</a></td><td><span class="vc-placeholder-text">$</span><a href="https://j2-capital.com/" target="_blank">J2 Capital</a></td><td><img src="https://www.af.mil/favicon.ico" alt="Dep SecWar Logo" class="logo-img af-generic"><a href="https://www.defense.gov/About/Deputy-Secretary-of-Defense/" target="_blank">Deputy Secretary of War (Dep SecWar)</a></td></tr>
+                <tr><td><img src="https://www.af.mil/favicon.ico" alt="NASIC Logo" class="logo-img af-generic"><a href="https://www.nasic.af.mil/" target="_blank">NASIC</a></td><td><span class="vc-placeholder-text">$</span><a href="https://www.hermeus.com/" target="_blank">Hermeus</a></td><td><img src="https://www.af.mil/favicon.ico" alt="AFMC Logo" class="logo-img af-generic"><a href="https://www.afmc.af.mil/" target="_blank">Air Force Materiel Command (AFMC/CC)</a></td></tr>
+                <tr><td><img src="https://www.af.mil/favicon.ico" alt="Checkmate Logo" class="logo-img af-generic"><a href="https://www.af.mil/News/Article-Display/Article/126656/checkmate-strategic-studies-group-supports-leaders/" target="_blank">Checkmate</a></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="AFLCMC Logo" class="logo-img af-generic"><a href="https://www.aflcmc.af.mil/" target="_blank">Air Force Life Cycle Management Center (AFMCLC/CC)</a></td></tr>
+                <tr><td><img src="https://www.af.mil/favicon.ico" alt="Strategic Studies Group Logo" class="logo-img af-generic"><a href="https://www.ssg.com.au/" target="_blank">Strategic Studies Group</a></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="PEOs Logo" class="logo-img af-generic"><a href="https://asc.army.mil/web/peos/" target="_blank">Program Executive Officers (PEOs)</a></td></tr>
+                <tr><td><img src="https://www.diu.mil/favicon.ico" alt="DIU Logo" class="logo-img"><a href="https://www.diu.mil/" target="_blank">DIU</a></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="SMLs Logo" class="logo-img af-generic"><a href="https://www.af.mil/About-Us/Air-Force-Senior-Leaders/" target="_blank">Senior Materiel Leaders (SMLs)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="MLs Logo" class="logo-img af-generic"><a href="https://www.af.mil/About-Us/Air-Force-Senior-Leaders/" target="_blank">Materiel Leaders (MLs)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="SPOs Logo" class="logo-img af-generic"><a href="https://www.dau.edu/glossary/system-program-office" target="_blank">System Program Offices (SPOs)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.diu.mil/favicon.ico" alt="DIU Logo" class="logo-img"><a href="https://www.diu.mil/" target="_blank">Defense Innovation Unit (DIU)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://afwerx.com/favicon.ico" alt="AFWERX Logo" class="logo-img"><a href="https://afwerx.com/" target="_blank">AFWERX</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="OSC Logo" class="logo-img af-generic"><a href="https://www.cto.mil/osc/" target="_blank">Office of Strategic Capital (OSC)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="Labs Logo" class="logo-img af-generic"><a href="https://www.afrl.af.mil/" target="_blank">Labs (AFRL, National, UARCs, FFRDCs, etc)</a></td></tr>
             </tbody>
         </table>
     </section>
