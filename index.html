@@ -114,17 +114,14 @@
             max-width: 600px;
             text-align: center;
         }
-        .lead-capture input {
-            width: 70%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .lead-capture button {
+        .lead-capture a {
             background-color: #ffd700;
             color: #000000;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            display: inline-block;
         }
         .stakeholder-table {
             width: 100%;
@@ -167,11 +164,12 @@
         #download-link {
             background-color: #ffd700;
             color: #000000;
-            padding: 10px 20px;
+            padding: 15px 30px;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
             margin-top: 10px;
+            display: inline-block;
         }
         .faq-item {
             margin-bottom: 20px;
@@ -191,23 +189,14 @@
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
             const downloadLink = document.getElementById('download-link');
             const faqQuestions = document.querySelectorAll('.faq-question');
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = document.querySelector('input').value;
-                if (email) {
-                    const pdfUrl = 'alchemy_blueprint.pdf';
-                    downloadLink.setAttribute('href', pdfUrl);
-                    downloadLink.setAttribute('download', '');
-                    downloadLink.click();
-
-                    const subject = "Alchemy Blueprint Download";
-                    const body = `Thank you for your interest, ${email}! You should have received the Alchemy Blueprint as a download. Let us know if you need further assistance.\n\nBest,\nThe Alchemists`;
-                    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                }
+            // No form submission needed, direct download on click
+            downloadLink.addEventListener('click', function(e) {
+                const pdfUrl = 'alchemy_blueprint.pdf';
+                this.setAttribute('href', pdfUrl);
+                this.setAttribute('download', '');
             });
 
             faqQuestions.forEach(question => {
@@ -287,11 +276,7 @@
     <section id="cta" class="lead-capture">
         <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
         <p>Discover how to convert untapped capital into war-winning solutions.</p>
-        <form>
-            <input type="email" placeholder="Your Email" required>
-            <button type="submit">Download Now</button>
-        </form>
-        <a href="alchemy_blueprint.pdf" id="download-link" download>Download Your Blueprint</a>
+        <a href="alchemy_blueprint.pdf" id="download-link" download>Download Blueprint</a>
     </section>
 
     <section id="success">
@@ -302,7 +287,7 @@
     <section id="failure">
         <h2>Avoid Failure: Don’t Let Threats Grow</h2>
         <p>Without Alchemy, untapped capital sits idle, widening gaps and risking defeat against adversaries.</p>
-        <a href="#cta" class="cta-button">Take Action Now</a>
+        <a href="mailto:alchemy@wildbluehorizons.org" class="cta-button">Take Action Now</a>
     </section>
 
     <section id="faq">
@@ -321,11 +306,11 @@
         </div>
         <div class="faq-item">
             <div class="faq-question">What is the Blueprint about?</div>
-            <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for download after submitting your email.</div>
+            <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for download.</div>
         </div>
         <div class="faq-item">
             <div class="faq-question">How can I get involved?</div>
-            <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or schedule a 30-minute call by downloading the Blueprint and reaching out to discuss collaboration opportunities.</div>
+            <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or download the Blueprint and reach out to discuss collaboration opportunities.</div>
         </div>
     </section>
 
