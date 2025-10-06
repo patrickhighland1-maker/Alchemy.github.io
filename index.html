@@ -16,32 +16,36 @@
         header {
             background-color: #000000; /* Pure black header */
             color: #ffd700;
-            padding: 10px 20px;
-            position: fixed;
+            padding: 5px 10px; /* Reduced padding for more left space */
             width: 100%;
-            top: 0;
-            z-index: 1000;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; /* Align content to the left */
             align-items: center;
+            box-sizing: border-box; /* Include padding in width calculation */
         }
         header h1 {
-            margin: 0;
+            margin: 0 10px 0 0; /* Margin to separate from nav */
             font-size: 1.5em;
             color: #ffd700;
+        }
+        nav {
+            flex-grow: 1; /* Allow nav to take available space */
         }
         nav ul {
             list-style: none;
             display: flex;
             margin: 0;
             padding: 0;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
         }
         nav li {
-            margin-left: 20px;
+            margin-left: 15px; /* Reduced margin for tighter spacing */
+            white-space: nowrap; /* Prevent text wrapping within li */
         }
         nav a {
             color: #ffd700;
             text-decoration: none;
+            font-size: 0.9em; /* Slightly reduce font size if needed */
         }
         .hero {
             background-color: #000000; /* Pure black hero */
@@ -88,6 +92,9 @@
         }
         #failure {
             background-color: #eee;
+        }
+        #faq {
+            background-color: #fff;
         }
         h2 {
             color: #000000;
@@ -158,7 +165,6 @@
             margin-right: 5px;
         }
         #download-link {
-            display: none;
             background-color: #ffd700;
             color: #000000;
             padding: 10px 20px;
@@ -167,22 +173,48 @@
             border-radius: 5px;
             margin-top: 10px;
         }
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #000000;
+            cursor: pointer;
+        }
+        .faq-answer {
+            display: none;
+            margin-top: 5px;
+        }
+        .faq-answer.active {
+            display: block;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('form').addEventListener('submit', function(e) {
+            const form = document.querySelector('form');
+            const downloadLink = document.getElementById('download-link');
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const email = document.querySelector('input').value;
                 if (email) {
-                    // Construct mailto link with attachment suggestion
+                    const pdfUrl = 'alchemy_blueprint.pdf';
+                    downloadLink.setAttribute('href', pdfUrl);
+                    downloadLink.setAttribute('download', '');
+                    downloadLink.click();
+
                     const subject = "Alchemy Blueprint Download";
-                    const body = "Thank you for your interest! Please find the attached Alchemy Blueprint.\n\nBest,\nThe Alchemists";
-                    const attachment = encodeURIComponent("alchemy_blueprint.pdf");
-                    const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}&attachment=${attachment}`;
-                    window.location.href = mailtoLink; // Opens email client
-                    // Note: This is a client-side suggestion; attachment may not work without server
-                    alert('An email has been prepared with the blueprint. Please check your email client to send it.');
+                    const body = `Thank you for your interest, ${email}! You should have received the Alchemy Blueprint as a download. Let us know if you need further assistance.\n\nBest,\nThe Alchemists`;
+                    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 }
+            });
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('active');
+                });
             });
         });
     </script>
@@ -196,6 +228,7 @@
                 <li><a href="#guide">Guide</a></li>
                 <li><a href="#plan">Plan</a></li>
                 <li><a href="#cta">Contact</a></li>
+                <li><a href="#faq">FAQ</a></li>
             </ul>
         </nav>
     </header>
@@ -214,7 +247,7 @@
 
     <section id="guide">
         <h2>Meet Your Guide: The Alchemists</h2>
-        <p>We are Lt Col Patrick “Dice” Highland, Maj Matt Anderson, and Maj Eric “Slick” Kenney from the Blue Horizons fellowship. Experienced pilots and strategists, we’re here to shadow your operations and turn challenges into victories.</p>
+        <p>We are <a href="highland_bio.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="kenney_bio.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced pilots and strategists, we’re here to shadow your operations and turn challenges into victories.</p>
     </section>
 
     <section id="plan">
@@ -258,7 +291,7 @@
             <input type="email" placeholder="Your Email" required>
             <button type="submit">Download Now</button>
         </form>
-        <a href="https://example.com/blueprint.pdf" id="download-link">Download Your Blueprint</a> <!-- Replace with actual PDF URL -->
+        <a href="alchemy_blueprint.pdf" id="download-link" download>Download Your Blueprint</a>
     </section>
 
     <section id="success">
@@ -270,6 +303,30 @@
         <h2>Avoid Failure: Don’t Let Threats Grow</h2>
         <p>Without Alchemy, untapped capital sits idle, widening gaps and risking defeat against adversaries.</p>
         <a href="#cta" class="cta-button">Take Action Now</a>
+    </section>
+
+    <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question">What is Alchemy's primary goal?</div>
+            <div class="faq-answer">Alchemy aims to transform $311B in untapped venture capital into war-winning capabilities by leveraging intelligence, investment, and integration across defense, government, and private sectors.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">How does Alchemy benefit stakeholders?</div>
+            <div class="faq-answer">Stakeholders gain faster acquisition processes, innovative prototypes, and aligned strategies, empowering warfighters and strengthening national security through collaboration.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Who can participate in Alchemy?</div>
+            <div class="faq-answer">Alchemy welcomes leaders from defense, intelligence, venture capital, Congress, and military program offices to contribute expertise and resources.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What is the Blueprint about?</div>
+            <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for download after submitting your email.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">How can I get involved?</div>
+            <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or schedule a 30-minute call by downloading the Blueprint and reaching out to discuss collaboration opportunities.</div>
+        </div>
     </section>
 
     <footer>
