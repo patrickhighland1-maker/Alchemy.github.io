@@ -17,7 +17,7 @@
             background-color: #000000; /* Pure black header */
             color: #ffd700;
             padding: 5px 10px; /* Reduced padding for more left space */
-            width: 100%;
+            width: 100%; /* Ensure full width */
             display: flex;
             justify-content: flex-start; /* Align content to the left */
             align-items: center;
@@ -51,7 +51,8 @@
             background-color: #000000; /* Pure black hero */
             color: #fff;
             text-align: center;
-            padding: 150px 20px 100px;
+            padding: 80px 20px 50px; /* Reduced vertical padding to shrink black area */
+            width: 100%; /* Ensure full width matches header */
         }
         .hero h2, .hero p, .hero a {
             color: #fff;
@@ -192,7 +193,7 @@
             const downloadLink = document.getElementById('download-link');
             const faqQuestions = document.querySelectorAll('.faq-question');
 
-            // No form submission needed, direct download on click
+            // Direct download on click
             downloadLink.addEventListener('click', function(e) {
                 const pdfUrl = 'alchemy_blueprint.pdf';
                 this.setAttribute('href', pdfUrl);
