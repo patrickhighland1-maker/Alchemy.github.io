@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alchemy: Vision Venture Victory</title>
+    <title>Alchemy: Turn Untapped Capital into War-Winning Power</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,114 +11,207 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            line-height: 1.6;
         }
         header {
             background-color: #1a1a1a;
             color: #ffd700;
-            text-align: center;
-            padding: 50px 20px;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
         }
         header h1 {
             margin: 0;
-            font-size: 3em;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            color: #ffd700; /* Ensure header text is visible */
         }
-        .logo {
-            max-width: 200px;
-            margin-bottom: 20px;
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            margin-left: 20px;
+        }
+        nav a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+        .hero {
+            background-color: #1a1a1a;
+            color: #fff; /* Explicitly set white for all text */
+            text-align: center;
+            padding: 150px 20px 100px;
+        }
+        .hero h2, .hero p, .hero a {
+            color: #fff; /* Ensure all elements in hero are white */
+        }
+        .cta-button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
         }
         section {
-            padding: 40px 20px;
+            padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
-        #about {
+        #problem {
             background-color: #fff;
         }
-        #team {
+        #guide {
             background-color: #eee;
         }
         #plan {
             background-color: #fff;
         }
-        #stakeholders {
+        #cta {
             background-color: #eee;
-        }
-        #contact {
-            background-color: #1a1a1a;
-            color: #fff;
             text-align: center;
+        }
+        #success {
+            background-color: #fff;
+        }
+        #failure {
+            background-color: #eee;
         }
         h2 {
             color: #1a1a1a;
-            border-bottom: 2px solid #ffd700;
-            padding-bottom: 10px;
-        }
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #ffd700;
-            color: #1a1a1a;
+            text-align: center;
         }
         footer {
             background-color: #1a1a1a;
             color: #ffd700;
             text-align: center;
+            padding: 20px;
+        }
+        .lead-capture {
+            background-color: #fff;
+            padding: 40px;
+            border: 1px solid #ddd;
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        .lead-capture input {
+            width: 70%;
             padding: 10px;
-            position: fixed;
-            bottom: 0;
+            margin-bottom: 10px;
+        }
+        .lead-capture button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .stakeholder-table {
             width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .stakeholder-table th, .stakeholder-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .stakeholder-table th {
+            background-color: #ffd700;
+            color: #1a1a1a;
+        }
+        .stakeholder-table a {
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .stakeholder-table a:hover {
+            text-decoration: underline;
+        }
+        .logo-img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        #download-link {
+            display: none;
+            background-color: #ffd700;
+            color: #1a1a1a;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.querySelector('input').value;
+                if (email) {
+                    alert('Thank you! Check your email for the blueprint.'); // Placeholder
+                    document.getElementById('download-link').style.display = 'inline-block';
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
         <img src="logo.png" alt="Alchemy Logo" class="logo">
-        <!-- Note: In a real website, replace the src with the actual logo URL or base64 encoded image. The provided logo is a hooded figure holding a glowing crystal. -->
         <h1>Alchemy</h1>
-        <p>Vision Venture Victory</p>
+        <nav>
+            <ul>
+                <li><a href="#problem">Problem</a></li>
+                <li><a href="#guide">Guide</a></li>
+                <li><a href="#plan">Plan</a></li>
+                <li><a href="#cta">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section id="about">
-        <h2>About Alchemy</h2>
-        <p>Alchemy is a dynamic engine that fuses intelligence, investment, and integration to convert $311B per year of uninvested venture capital into capabilities that win wars. It empowers leaders across defense, startups, and Congress to overcome acquisition challenges and reclaim America’s innovative edge against adversaries like the PRC.</p>
+    <section class="hero">
+        <h2>Keep America Safe with Untapped Power</h2>
+        <p>Alchemy transforms $311B in venture capital into war-winning capabilities through intelligence and integration.</p>
+        <a href="#cta" class="cta-button">Partner with Us</a>
     </section>
 
-    <section id="team">
-        <h2>Meet the Alchemists</h2>
-        <p>Your partners in innovation:</p>
-        <ul>
-            <li>Maj Matthew "Matt" Anderson, Special Operations Pilot bridging battle to breakthroughs</li>
-            <li>Lt Col Patrick "Dice" Highland, PhD, Experimental Test Pilot engineering prototypes under intense pressure</li>
-            <li>Maj Eric "Slick" Kenney, Offensive Cyberspace Operations Officer humbled by China's speed, now forging defenses to reclaim it</li>
-        </ul>
-        <p>We want to learn from you, shadowing your operations to understand concerns, and then use those lessons to create Alchemy: A Transformative Innovation Engine turning $311B uninvested VC into war-winning gold.</p>
+    <section id="problem">
+        <h2>The Problem: Acquisition Delays Cost Lives</h2>
+        <p>As a defense, intelligence, or venture capital leader, you struggle with slow acquisitions—adversaries like the PRC outpace us, turning innovation gaps into threats while budgets and schedules clash.</p>
+    </section>
+
+    <section id="guide">
+        <h2>Meet Your Guide: The Alchemists</h2>
+        <p>We are Lt Col Patrick “Dice” Highland, Maj Matt Anderson, and Maj Eric “Slick” Kenney from the Blue Horizons fellowship. Experienced pilots and strategists, we’re here to shadow your operations and turn challenges into victories.</p>
     </section>
 
     <section id="plan">
-        <h2>Our Plan: Intelligence, Investment, and Integration</h2>
-        <ul>
-            <li><strong>Intelligence</strong> fuses reports, open data, doctrine, and analysis to spot U.S. gaps—like mobility boosts or defense hardening.</li>
-            <li><strong>Investment</strong> publishes insights in a DoD-funded marketplace (e.g., $500K prototypes); startups innovate, VC amplifies. Outputs: Proven gear countering adversary weaknesses.</li>
-            <li><strong>Integration</strong> aligns with Planning, Programming, Budgeting, and Execution cycles (e.g., Pacific Deterrence Initiative for Indo-Pacific strength against PRC)—ensuring smooth adoption.</li>
-        </ul>
-        <p>Let’s prove it. Together we should start with a test case; run the Intelligence, Investment, and Integration process, iterate on issues we identify along the way, and engineer a competitive advantage beyond China's reach.</p>
-    </section>
-
-    <section id="stakeholders">
-        <h2>Stakeholders</h2>
-        <table>
+        <h2>The Plan: Whole-of-Society Victory</h2>
+        <ol>
+            <li><strong>Intelligence:</strong> Leverage all-source data from <img src="https://www.airuniversity.af.edu/Portals/10/CASI/images/logo.png" alt="CASI Logo" class="logo-img"><a href="https://www.airuniversity.af.edu/CASI/" target="_blank">China Aerospace Studies Institute</a> and <img src="https://www.pacaf.af.mil/Portals/8/images/logo.png" alt="PACAF Logo" class="logo-img"><a href="https://www.pacaf.af.mil/" target="_blank">PACAF/A2</a> to pinpoint gaps.</li>
+            <li><strong>Investment:</strong> Direct <img src="https://www.8vc.com/logo.png" alt="8VC Logo" class="logo-img"><a href="https://www.8vc.com/" target="_blank">8VC</a> and <img src="https://shieldcap.com/logo.png" alt="Shield Capital Logo" class="logo-img"><a href="https://shieldcap.com/" target="_blank">Shield Capital</a> into DoD prototypes for rapid innovation.</li>
+            <li><strong>Integration:</strong> Collaborate with <img src="https://www.congress.gov/logo.png" alt="Congress Logo" class="logo-img"><a href="https://www.congress.gov/" target="_blank">Congress</a> and the <img src="https://www.jcs.mil/Portals/36/Images/jcs-seal.png" alt="JCS Logo" class="logo-img"><a href="https://www.jcs.mil/" target="_blank">Chairman of the Joint Chiefs of Staff</a> for seamless deployment.</li>
+        </ol>
+        <h3>Key Stakeholders</h3>
+        <table class="stakeholder-table">
             <thead>
                 <tr>
                     <th>Intelligence</th>
@@ -127,88 +220,46 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>China Aerospace Studies Institute</td>
-                    <td>8VC</td>
-                    <td>Congress</td>
-                </tr>
-                <tr>
-                    <td>Taiwan Defense Group</td>
-                    <td>Shield Capital</td>
-                    <td>Chairman of the Joint Chiefs of Staff (CJCS)</td>
-                </tr>
-                <tr>
-                    <td>PACAF/A2</td>
-                    <td>Hermeus</td>
-                    <td>Deputy Secretary of War (Dep SecWar)</td>
-                </tr>
-                <tr>
-                    <td>J2</td>
-                    <td></td>
-                    <td>Deputy Secretary of the Air Force for Acquisitions (SAF/AQ)</td>
-                </tr>
-                <tr>
-                    <td>NASIC</td>
-                    <td></td>
-                    <td>Air Force Materiel Command (AFMC/CC)</td>
-                </tr>
-                <tr>
-                    <td>Checkmate</td>
-                    <td></td>
-                    <td>Air Force Life Cycle Management Center (AFMCLC/CC)</td>
-                </tr>
-                <tr>
-                    <td>Straegic Studies Group</td>
-                    <td></td>
-                    <td>Program Executive Officers (PEOs)</td>
-                </tr>
-                <tr>
-                    <td>System Program Offices (SPOs)</td>
-                    <td></td>
-                    <td>Senior Materiel Leaders (SMLs)</td>
-                </tr>
-                <tr>
-                    <td>DIU</td>
-                    <td></td>
-                    <td>Materiel Leaders (MLs)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>System Program Offices (SPOs)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Defense Innovation Unit (DIU)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>AFWERX</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Office of Strategic Capital (OSC)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Labs (AFRL, National, UARCs, FFRDCs, etc)</td>
-                </tr>
+                <tr><td><img src="https://www.airuniversity.af.edu/Portals/10/CASI/images/logo.png" alt="CASI Logo" class="logo-img"><a href="https://www.airuniversity.af.edu/CASI/" target="_blank">China Aerospace Studies Institute</a></td><td><img src="https://www.8vc.com/logo.png" alt="8VC Logo" class="logo-img"><a href="https://www.8vc.com/" target="_blank">8VC</a></td><td><img src="https://www.congress.gov/logo.png" alt="Congress Logo" class="logo-img"><a href="https://www.congress.gov/" target="_blank">Congress</a></td></tr>
+                <tr><td><img src="https://www.ustaiwandefense.com/logo.png" alt="Taiwan Defense Group Logo" class="logo-img"><a href="https://www.ustaiwandefense.com/" target="_blank">Taiwan Defense Group</a></td><td><img src="https://shieldcap.com/logo.png" alt="Shield Capital Logo" class="logo-img"><a href="https://shieldcap.com/" target="_blank">Shield Capital</a></td><td><img src="https://www.jcs.mil/Portals/36/Images/jcs-seal.png" alt="CJCS Logo" class="logo-img"><a href="https://www.jcs.mil/" target="_blank">Chairman of the Joint Chiefs of Staff (CJCS)</a></td></tr>
+                <tr><td><img src="https://www.pacaf.af.mil/Portals/8/images/logo.png" alt="PACAF Logo" class="logo-img"><a href="https://www.pacaf.af.mil/" target="_blank">PACAF/A2</a></td><td><img src="https://www.j2vp.com/logo.png" alt="J2 Capital Logo" class="logo-img"><a href="https://www.j2vp.com/" target="_blank">J2 Capital</a></td><td><img src="https://www.defense.gov/Portals/1/features/2023/depsecdef/logo.png" alt="Dep SecWar Logo" class="logo-img"><a href="https://www.defense.gov/About/Deputy-Secretary-of-Defense/" target="_blank">Deputy Secretary of War (Dep SecWar)</a></td></tr>
+                <tr><td><img src="https://www.nasic.af.mil/Portals/19/images/logo.png" alt="NASIC Logo" class="logo-img"><a href="https://www.nasic.af.mil/" target="_blank">NASIC</a></td><td><img src="https://www.hermeus.com/logo.svg" alt="Hermeus Logo" class="logo-img"><a href="https://www.hermeus.com/" target="_blank">Hermeus</a></td><td><img src="https://www.afmc.af.mil/Portals/12/documents/logo.png" alt="AFMC Logo" class="logo-img"><a href="https://www.afmc.af.mil/" target="_blank">Air Force Materiel Command (AFMC/CC)</a></td></tr>
+                <tr><td><img src="https://www.af.mil/logo.png" alt="Checkmate Logo" class="logo-img"><a href="https://www.af.mil/News/Article-Display/Article/126656/checkmate-strategic-studies-group-supports-leaders/" target="_blank">Checkmate</a></td><td></td><td><img src="https://www.aflcmc.af.mil/Portals/12/images/logo.png" alt="AFLCMC Logo" class="logo-img"><a href="https://www.aflcmc.af.mil/" target="_blank">Air Force Life Cycle Management Center (AFMCLC/CC)</a></td></tr>
+                <tr><td><img src="https://www.ssg.com.au/logo.png" alt="Strategic Studies Group Logo" class="logo-img"><a href="https://www.ssg.com.au/" target="_blank">Strategic Studies Group</a></td><td></td><td><img src="https://asc.army.mil/web/peos/logo.png" alt="PEOs Logo" class="logo-img"><a href="https://asc.army.mil/web/peos/" target="_blank">Program Executive Officers (PEOs)</a></td></tr>
+                <tr><td><img src="https://www.diu.mil/logo.png" alt="DIU Logo" class="logo-img"><a href="https://www.diu.mil/" target="_blank">DIU</a></td><td></td><td><img src="https://www.af.mil/logo.png" alt="SMLs Logo" class="logo-img"><a href="https://www.af.mil/About-Us/Air-Force-Senior-Leaders/" target="_blank">Senior Materiel Leaders (SMLs)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.af.mil/logo.png" alt="MLs Logo" class="logo-img"><a href="https://www.af.mil/About-Us/Air-Force-Senior-Leaders/" target="_blank">Materiel Leaders (MLs)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.dau.edu/glossary/logo.png" alt="SPOs Logo" class="logo-img"><a href="https://www.dau.edu/glossary/system-program-office" target="_blank">System Program Offices (SPOs)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.diu.mil/logo.png" alt="DIU Logo" class="logo-img"><a href="https://www.diu.mil/" target="_blank">Defense Innovation Unit (DIU)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://afwerx.com/logo.png" alt="AFWERX Logo" class="logo-img"><a href="https://afwerx.com/" target="_blank">AFWERX</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.cto.mil/osc/logo.png" alt="OSC Logo" class="logo-img"><a href="https://www.cto.mil/osc/" target="_blank">Office of Strategic Capital (OSC)</a></td></tr>
+                <tr><td></td><td></td><td><img src="https://www.afrl.af.mil/Portals/94/images/logo.png" alt="AFRL Logo" class="logo-img"><a href="https://www.afrl.af.mil/" target="_blank">Labs (AFRL, National, UARCs, FFRDCs, etc)</a></td></tr>
             </tbody>
         </table>
     </section>
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>Email: alchemy@wildbluehorizons.org</p>
-        <p>Phone: (719) 201-5582</p>
+    <section id="cta" class="lead-capture">
+        <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
+        <p>Discover how to convert untapped capital into war-winning solutions.</p>
+        <form>
+            <input type="email" placeholder="Your Email" required>
+            <button type="submit">Download Now</button>
+        </form>
+        <a href="https://example.com/blueprint.pdf" id="download-link">Download Your Blueprint</a> <!-- Replace with actual PDF URL -->
+    </section>
+
+    <section id="success">
+        <h2>Success: War-Winning Capabilities Delivered</h2>
+        <p>Alchemy turns your leadership into action, delivering innovations that secure America’s future.</p>
+    </section>
+
+    <section id="failure">
+        <h2>Avoid Failure: Don’t Let Threats Grow</h2>
+        <p>Without Alchemy, untapped capital sits idle, widening gaps and risking defeat against adversaries.</p>
+        <a href="#cta" class="cta-button">Take Action Now</a>
     </section>
 
     <footer>
-        &copy; 2025 Alchemy. All rights reserved.
+        <p>&copy; 2025 Alchemy. Vision Venture Victory. <a href="mailto:alchemy@wildbluehorizons.org">Contact Us</a> | (719) 201-5582</p>
     </footer>
 </body>
 </html>
