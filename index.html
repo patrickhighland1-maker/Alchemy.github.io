@@ -15,6 +15,7 @@
             min-height: 100vh; /* Ensure full viewport height */
             display: flex;
             flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
         .sidebar {
             position: fixed;
@@ -52,6 +53,7 @@
             width: 100%;
             padding: 0 20px;
             box-sizing: border-box;
+            min-width: 0; /* Prevent width overflow */
         }
         .hero {
             background-color: #000000; /* Pure black hero */
@@ -59,6 +61,7 @@
             text-align: center;
             padding: 80px 20px 50px;
             width: 100%;
+            box-sizing: border-box;
         }
         .hero h2, .hero p, .hero a {
             color: #fff;
@@ -83,6 +86,7 @@
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
+            box-sizing: border-box;
         }
         #problem {
             background-color: #fff;
@@ -114,6 +118,8 @@
             text-align: center;
             padding: 20px;
             margin-left: 200px; /* Align with content */
+            box-sizing: border-box;
+            width: 100%;
         }
         .lead-capture {
             background-color: #fff;
@@ -123,6 +129,7 @@
             max-width: 600px;
             text-align: center;
             width: 100%;
+            box-sizing: border-box;
         }
         .lead-capture a {
             background-color: #ffd700;
@@ -279,7 +286,7 @@
         <section class="hero">
             <img src="logo.png" alt="Alchemy Logo" class="hero-logo">
             <h2>A whole-of-society approach to keeping America safe with Untapped Power</h2>
-            <p>Alchemy transforms $311B in venture capital into war-winning capabilities through intelligence and integration.</p>
+            <p>Alchemy is a catalyst that leverages all-source intelligence, venture capital investment, and whole-of-government integration to convert hundreds of billions in untapped capital into capabilities that win wars.</p>
             <a href="#cta" class="cta-button">Partner with Us</a>
         </section>
 
@@ -290,7 +297,7 @@
 
         <section id="guide">
             <h2>The Alchemists</h2>
-            <p>We are <a href="highland_bio.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="kenney_bio.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced pilots and strategists, we’re here to shadow your operations and turn challenges into victories.</p>
+            <p>We are <a href="highland_bio.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="kenney_bio.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
         </section>
 
         <section id="plan">
