@@ -16,6 +16,7 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden; /* Prevent horizontal scrolling */
+            position: relative; /* Establish positioning context */
         }
         .sidebar {
             position: fixed;
@@ -45,17 +46,29 @@
             display: block;
             padding: 5px;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .sidebar a:hover, .sidebar a.active {
             background-color: #333; /* Highlight active section */
         }
-        .content {
+        .container {
+            position: relative;
             margin-left: 200px; /* Offset for sidebar */
-            width: calc(100% - 200px); /* Dynamic width based on sidebar */
+            width: 100%;
+            max-width: calc(100% - 200px); /* Prevent overflow beyond sidebar */
+            box-sizing: border-box;
+            flex: 1; /* Grow to fill available space */
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            width: 100%; /* Fill container width */
             padding: 0 20px;
             box-sizing: border-box;
-            min-height: 100vh; /* Ensure content is fully visible */
-            overflow-y: auto; /* Allow vertical scrolling if needed */
+            min-width: 0; /* Prevent width overflow */
+            word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
+            flex: 1; /* Grow to fill available space */
         }
         .hero {
             background-color: #000000; /* Pure black hero */
@@ -65,10 +78,12 @@
             width: 100%;
             box-sizing: border-box;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .hero h2, .hero p, .hero a {
             color: #fff;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .hero-logo {
             width: 200px;
@@ -85,13 +100,14 @@
             display: inline-block; /* Ensure button can be centered */
             margin: 0 auto; /* Center horizontally */
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         section {
             padding: 60px 20px;
             width: 100%;
             box-sizing: border-box;
             word-wrap: break-word; /* Ensure text wraps */
-            overflow-wrap: anywhere; /* Allow breaking at any point */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         #problem {
             background-color: #fff;
@@ -117,27 +133,30 @@
             color: #000000;
             text-align: center;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         footer {
-            background-color: #1a1a1a;
+            background-color: #000000; /* Match hero black for consistent color */
             color: #ffd700;
             text-align: center;
             padding: 20px;
-            margin-left: 200px; /* Align with content */
+            width: 100%; /* Full width */
             box-sizing: border-box;
-            width: 100%;
-            word-wrap: break-word; /* Ensure text wraps */
+            position: relative; /* Align with container */
+            left: 0; /* Reset left offset */
+            margin-left: 0; /* Remove offset to center within container */
         }
         .lead-capture {
             background-color: #fff;
             padding: 40px;
             border: 1px solid #ddd;
             margin: 20px auto;
-            max-width: 600px;
+            max-width: 100%; /* Allow full width, wrap content */
             text-align: center;
             width: 100%;
             box-sizing: border-box;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .lead-capture a {
             background-color: #ffd700;
@@ -148,6 +167,7 @@
             border-radius: 5px;
             display: inline-block;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .logo-img {
             width: 30px;
@@ -165,6 +185,7 @@
             vertical-align: middle;
             margin-right: 5px;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         #download-link {
             background-color: #ffd700;
@@ -176,9 +197,12 @@
             margin-top: 10px;
             display: inline-block;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .faq-item {
             margin-bottom: 20px;
+            word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .faq-question {
             font-weight: bold;
@@ -187,17 +211,20 @@
             display: inline-flex;
             align-items: center;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .faq-expand {
             margin-left: 10px;
             font-size: 1em;
             cursor: pointer;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .faq-answer {
             display: none;
             margin-top: 5px;
             word-wrap: break-word; /* Ensure text wraps */
+            overflow-wrap: break-word; /* Allow breaking at any point */
         }
         .faq-answer.active {
             display: block;
@@ -208,9 +235,11 @@
             .sidebar {
                 width: 100px;
             }
-            .content, footer {
+            .container, footer {
                 margin-left: 100px;
-                width: calc(100% - 100px); /* Adjust content width */
+            }
+            .content {
+                padding: 0 10px; /* Reduce padding on smaller screens */
             }
             .sidebar a {
                 font-size: 0.8em;
@@ -227,9 +256,11 @@
             .sidebar {
                 display: none; /* Hide sidebar on very small screens */
             }
-            .content, footer {
+            .container, footer {
                 margin-left: 0;
-                width: 100%; /* Full width when sidebar is hidden */
+            }
+            .content {
+                padding: 0 10px;
             }
             .hero {
                 padding: 30px 10px 20px;
@@ -312,76 +343,78 @@
             <li><a href="#faq">FAQ</a></li>
         </ul>
     </div>
-    <div class="content">
-        <section class="hero">
-            <img src="logo.png" alt="Alchemy Logo" class="hero-logo">
-            <h2>A whole-of-society approach to keeping America safe with Untapped Power</h2>
-            <p>Alchemy is a catalyst that leverages all-source intelligence, venture capital investment, and whole-of-government integration to convert hundreds of billions of dollars per year in untapped capital into capabilities that win wars.</p>
-            <a href="#cta" class="cta-button">Partner with Us</a>
-        </section>
+    <div class="container">
+        <div class="content">
+            <section class="hero">
+                <img src="logo.png" alt="Alchemy Logo" class="hero-logo">
+                <h2>A whole-of-society approach to keeping America safe with Untapped Power</h2>
+                <p>Alchemy is a catalyst that leverages all-source intelligence, venture capital investment, and whole-of-government integration to convert hundreds of billions of dollars per year in untapped capital into capabilities that win wars.</p>
+                <a href="#cta" class="cta-button">Partner with Us</a>
+            </section>
 
-        <section id="problem">
-            <h2>The Problem: Acquisition Delays Cost Lives</h2>
-            <p>As a defense, intelligence, or venture capital leader, you struggle with slow acquisitions—adversaries like the PRC outpace us, turning innovation gaps into threats while budgets and schedules clash.</p>
-        </section>
+            <section id="problem">
+                <h2>The Problem: Acquisition Delays Cost Lives</h2>
+                <p>As a defense, intelligence, or venture capital leader, you struggle with slow acquisitions—adversaries like the PRC outpace us, turning innovation gaps into threats while budgets and schedules clash.</p>
+            </section>
 
-        <section id="guide">
-            <h2>The Alchemists</h2>
-            <p>We are <a href="alchemy_blueprint.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="alchemy_blueprint.pdf" download>Maj Matt Anderson</a>, and <a href="alchemy_blueprint.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
-        </section>
+            <section id="guide">
+                <h2>The Alchemists</h2>
+                <p>We are <a href="alchemy_blueprint.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="alchemy_blueprint.pdf" download>Maj Matt Anderson</a>, and <a href="alchemy_blueprint.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
+            </section>
 
-        <section id="plan">
-            <h2>The Plan: Whole-of-Society Victory</h2>
-            <ol>
-                <li><strong>Intelligence:</strong> Leverage all-source data from Defense Research Institutions and Military Intelligence Units to pinpoint gaps.</li>
-                <li><strong>Investment:</strong> Informs Venture Capital Firms into funding DoD prototypes for rapid innovation.</li>
-                <li><strong>Integration:</strong> Collaborate with Government Bodies and Military Leadership for seamless deployment.</li>
-            </ol>
-        </section>
+            <section id="plan">
+                <h2>The Plan: Whole-of-Society Victory</h2>
+                <ol>
+                    <li><strong>Intelligence:</strong> Leverage all-source data from Defense Research Institutions and Military Intelligence Units to pinpoint gaps.</li>
+                    <li><strong>Investment:</strong> Informs Venture Capital Firms into funding DoD prototypes for rapid innovation.</li>
+                    <li><strong>Integration:</strong> Collaborate with Government Bodies and Military Leadership for seamless deployment.</li>
+                </ol>
+            </section>
 
-        <section id="cta" class="lead-capture">
-            <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
-            <p>Discover how to convert untapped capital into war-winning solutions.</p>
-            <a href="alchemy_blueprint.pdf" id="download-link" download>Download Blueprint</a>
-        </section>
+            <section id="cta" class="lead-capture">
+                <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
+                <p>Discover how to convert untapped capital into war-winning solutions.</p>
+                <a href="alchemy_blueprint.pdf" id="download-link" download>Download Blueprint</a>
+            </section>
 
-        <section id="success">
-            <h2>War-Winning Capabilities Delivered</h2>
-            <p>Alchemy turns your leadership into action, delivering innovations that secure America’s future.</p>
-            <a href="mailto:alchemy@wildbluehorizons.org" class="cta-button">Take Action Now</a>
-        </section>
+            <section id="success">
+                <h2>War-Winning Capabilities Delivered</h2>
+                <p>Alchemy turns your leadership into action, delivering innovations that secure America’s future.</p>
+                <a href="mailto:alchemy@wildbluehorizons.org" class="cta-button">Take Action Now</a>
+            </section>
 
-        <section id="faq">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <div class="faq-question">What is Alchemy's primary goal?</div>
-                <div class="faq-answer">Alchemy aims to transform hundreds of billions of dollars per year in untapped venture capital into war-winning capabilities by leveraging intelligence, investment, and integration across defense, government, and private sectors.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">How does Alchemy benefit stakeholders?</div>
-                <div class="faq-answer">Stakeholders gain faster acquisition processes, innovative prototypes, and aligned strategies, empowering warfighters and strengthening national security through collaboration.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Who can participate in Alchemy?</div>
-                <div class="faq-answer">Alchemy welcomes leaders from defense, intelligence, venture capital, Congress, and military program offices to contribute expertise and resources.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">What is the Blueprint about?</div>
-                <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for <a href="alchemy_blueprint.pdf" download>download</a>.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">How can I get involved?</div>
-                <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or <a href="alchemy_blueprint.pdf" download>download</a> the Blueprint and reach out to discuss collaboration opportunities.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">My organization already does something like this... how is Alchemy different?</div>
-                <div class="faq-answer">Alchemy stands out by integrating a whole-of-society approach, combining all-source intelligence, venture capital, and government resources into a unified strategy, offering a scalable model tailored to national defense needs unlike traditional isolated efforts.</div>
-            </div>
-        </section>
+            <section id="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">What is Alchemy's primary goal?</div>
+                    <div class="faq-answer">Alchemy aims to transform hundreds of billions of dollars per year in untapped venture capital into war-winning capabilities by leveraging intelligence, investment, and integration across defense, government, and private sectors.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How does Alchemy benefit stakeholders?</div>
+                    <div class="faq-answer">Stakeholders gain faster acquisition processes, innovative prototypes, and aligned strategies, empowering warfighters and strengthening national security through collaboration.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Who can participate in Alchemy?</div>
+                    <div class="faq-answer">Alchemy welcomes leaders from defense, intelligence, venture capital, Congress, and military program offices to contribute expertise and resources.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the Blueprint about?</div>
+                    <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for <a href="alchemy_blueprint.pdf" download>download</a>.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How can I get involved?</div>
+                    <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or <a href="alchemy_blueprint.pdf" download>download</a> the Blueprint and reach out to discuss collaboration opportunities.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">My organization already does something like this... how is Alchemy different?</div>
+                    <div class="faq-answer">Alchemy stands out by integrating a whole-of-society approach, combining all-source intelligence, venture capital, and government resources into a unified strategy, offering a scalable model tailored to national defense needs unlike traditional isolated efforts.</div>
+                </div>
+            </section>
 
-        <footer>
-            <p>&copy; 2025 Alchemy. Vision Venture Victory. <a href="mailto:alchemy@wildbluehorizons.org">Contact Us</a></p>
-        </footer>
+            <footer>
+                <p>&copy; 2025 Alchemy. Vision Venture Victory. <a href="mailto:alchemy@wildbluehorizons.org">Contact Us</a></p>
+            </footer>
+        </div>
     </div>
 </body>
 </html>
