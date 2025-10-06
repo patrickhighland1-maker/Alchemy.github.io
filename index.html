@@ -12,47 +12,53 @@
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
-        }
-        header {
-            background-color: #000000; /* Pure black header */
-            color: #ffd700;
-            padding: 5px 10px; /* Reduced padding for more left space */
-            width: 100%; /* Ensure full width */
+            min-height: 100vh; /* Ensure full viewport height */
             display: flex;
-            justify-content: flex-start; /* Align content to the left */
-            align-items: center;
-            box-sizing: border-box; /* Include padding in width calculation */
+            flex-direction: column;
         }
-        header h1 {
-            margin: 0 10px 0 0; /* Margin to separate from nav */
-            font-size: 1.5em;
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100vh;
+            background-color: #000000; /* Match hero black */
             color: #ffd700;
+            padding: 20px 10px;
+            box-sizing: border-box;
+            z-index: 1000;
+            transition: width 0.3s;
         }
-        nav {
-            flex-grow: 1; /* Allow nav to take available space */
-        }
-        nav ul {
+        .sidebar ul {
             list-style: none;
-            display: flex;
-            margin: 0;
             padding: 0;
-            flex-wrap: wrap; /* Allow wrapping on small screens */
+            margin: 0;
         }
-        nav li {
-            margin-left: 15px; /* Reduced margin for tighter spacing */
-            white-space: nowrap; /* Prevent text wrapping within li */
+        .sidebar li {
+            margin: 15px 0;
         }
-        nav a {
+        .sidebar a {
             color: #ffd700;
             text-decoration: none;
-            font-size: 0.9em; /* Slightly reduce font size if needed */
+            font-size: 1em;
+            display: block;
+            padding: 5px;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #333; /* Highlight active section */
+        }
+        .content {
+            margin-left: 200px; /* Offset for sidebar */
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
         .hero {
             background-color: #000000; /* Pure black hero */
             color: #fff;
             text-align: center;
-            padding: 80px 20px 50px; /* Reduced vertical padding to shrink black area */
-            width: 100%; /* Ensure full width matches header */
+            padding: 80px 20px 50px;
+            width: 100%;
         }
         .hero h2, .hero p, .hero a {
             color: #fff;
@@ -69,11 +75,14 @@
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
+            display: inline-block; /* Ensure button can be centered */
+            margin: 0 auto; /* Center horizontally */
         }
         section {
             padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
         }
         #problem {
             background-color: #fff;
@@ -90,9 +99,7 @@
         }
         #success {
             background-color: #fff;
-        }
-        #failure {
-            background-color: #eee;
+            text-align: center; /* Ensure centering for the section */
         }
         #faq {
             background-color: #fff;
@@ -106,6 +113,7 @@
             color: #ffd700;
             text-align: center;
             padding: 20px;
+            margin-left: 200px; /* Align with content */
         }
         .lead-capture {
             background-color: #fff;
@@ -114,6 +122,7 @@
             margin: 20px auto;
             max-width: 600px;
             text-align: center;
+            width: 100%;
         }
         .lead-capture a {
             background-color: #ffd700;
@@ -123,28 +132,6 @@
             font-weight: bold;
             border-radius: 5px;
             display: inline-block;
-        }
-        .stakeholder-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .stakeholder-table th, .stakeholder-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-            vertical-align: top;
-        }
-        .stakeholder-table th {
-            background-color: #ffd700;
-            color: #000000;
-        }
-        .stakeholder-table a {
-            color: #000000;
-            text-decoration: none;
-        }
-        .stakeholder-table a:hover {
-            text-decoration: underline;
         }
         .logo-img {
             width: 30px;
@@ -187,11 +174,56 @@
         .faq-answer.active {
             display: block;
         }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100px;
+            }
+            .content, footer {
+                margin-left: 100px;
+            }
+            .sidebar a {
+                font-size: 0.8em;
+            }
+            .hero {
+                padding: 50px 10px 30px;
+            }
+            section {
+                padding: 40px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                display: none; /* Hide sidebar on very small screens */
+            }
+            .content, footer {
+                margin-left: 0;
+            }
+            .hero {
+                padding: 30px 10px 20px;
+            }
+            .hero-logo {
+                width: 150px;
+            }
+            .lead-capture {
+                padding: 20px;
+                max-width: 100%;
+            }
+            section {
+                padding: 30px 10px;
+            }
+            .cta-button {
+                padding: 10px 20px;
+            }
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const downloadLink = document.getElementById('download-link');
             const faqQuestions = document.querySelectorAll('.faq-question');
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
 
             // Direct download on click
             downloadLink.addEventListener('click', function(e) {
@@ -199,6 +231,30 @@
                 this.setAttribute('href', pdfUrl);
                 this.setAttribute('download', '');
             });
+
+            // Highlight active section based on scroll position
+            function setActiveLink() {
+                let scrollPosition = window.scrollY;
+
+                sidebarLinks.forEach(link => {
+                    const href = link.getAttribute('href').substring(1); // Remove '#'
+                    const section = document.getElementById(href);
+                    if (section) {
+                        const sectionTop = section.offsetTop - 100; // Offset for padding
+                        const sectionBottom = sectionTop + section.offsetHeight;
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    }
+                });
+            }
+
+            // Add scroll event listener
+            window.addEventListener('scroll', setActiveLink);
+            // Set initial active link
+            setActiveLink();
 
             faqQuestions.forEach(question => {
                 question.addEventListener('click', function() {
@@ -210,113 +266,81 @@
     </script>
 </head>
 <body>
-    <header>
-        <h1>Alchemy</h1>
-        <nav>
-            <ul>
-                <li><a href="#problem">Problem</a></li>
-                <li><a href="#guide">Guide</a></li>
-                <li><a href="#plan">Plan</a></li>
-                <li><a href="#cta">Contact</a></li>
-                <li><a href="#faq">FAQ</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="sidebar">
+        <ul>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#guide">Guide</a></li>
+            <li><a href="#plan">Plan</a></li>
+            <li><a href="#cta">Contact</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <section class="hero">
+            <img src="logo.png" alt="Alchemy Logo" class="hero-logo">
+            <h2>A whole-of-society approach to keeping America safe with Untapped Power</h2>
+            <p>Alchemy transforms $311B in venture capital into war-winning capabilities through intelligence and integration.</p>
+            <a href="#cta" class="cta-button">Partner with Us</a>
+        </section>
 
-    <section class="hero">
-        <img src="logo.png" alt="Alchemy Logo" class="hero-logo">
-        <h2>Keep America Safe with Untapped Power</h2>
-        <p>Alchemy transforms $311B in venture capital into war-winning capabilities through intelligence and integration.</p>
-        <a href="#cta" class="cta-button">Partner with Us</a>
-    </section>
+        <section id="problem">
+            <h2>The Problem: Acquisition Delays Cost Lives</h2>
+            <p>As a defense, intelligence, or venture capital leader, you struggle with slow acquisitions—adversaries like the PRC outpace us, turning innovation gaps into threats while budgets and schedules clash.</p>
+        </section>
 
-    <section id="problem">
-        <h2>The Problem: Acquisition Delays Cost Lives</h2>
-        <p>As a defense, intelligence, or venture capital leader, you struggle with slow acquisitions—adversaries like the PRC outpace us, turning innovation gaps into threats while budgets and schedules clash.</p>
-    </section>
+        <section id="guide">
+            <h2>The Alchemists</h2>
+            <p>We are <a href="highland_bio.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="kenney_bio.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced pilots and strategists, we’re here to shadow your operations and turn challenges into victories.</p>
+        </section>
 
-    <section id="guide">
-        <h2>Meet Your Guide: The Alchemists</h2>
-        <p>We are <a href="highland_bio.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="kenney_bio.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced pilots and strategists, we’re here to shadow your operations and turn challenges into victories.</p>
-    </section>
+        <section id="plan">
+            <h2>The Plan: Whole-of-Society Victory</h2>
+            <ol>
+                <li><strong>Intelligence:</strong> Leverage all-source data from Defense Research Institutions and Military Intelligence Units to pinpoint gaps.</li>
+                <li><strong>Investment:</strong> Informs Venture Capital Firms into DoD prototypes for rapid innovation.</li>
+                <li><strong>Integration:</strong> Collaborate with Government Bodies and Military Leadership for seamless deployment.</li>
+            </ol>
+        </section>
 
-    <section id="plan">
-        <h2>The Plan: Whole-of-Society Victory</h2>
-        <ol>
-            <li><strong>Intelligence:</strong> Leverage all-source data from <img src="https://www.af.mil/favicon.ico" alt="CASI Logo" class="logo-img af-generic"><a href="https://www.airuniversity.af.edu/CASI/" target="_blank">China Aerospace Studies Institute</a> and <img src="https://www.af.mil/favicon.ico" alt="PACAF Logo" class="logo-img af-generic"><a href="https://www.pacaf.af.mil/" target="_blank">PACAF/A2</a> to pinpoint gaps.</li>
-            <li><strong>Investment:</strong> Direct <span class="vc-placeholder-text">$</span><a href="https://www.8vc.com/" target="_blank">8VC</a> and <span class="vc-placeholder-text">$</span><a href="https://shieldcap.com/" target="_blank">Shield Capital</a> into DoD prototypes for rapid innovation.</li>
-            <li><strong>Integration:</strong> Collaborate with <img src="https://www.congress.gov/favicon.ico" alt="Congress Logo" class="logo-img"><a href="https://www.congress.gov/" target="_blank">Congress</a> and the <img src="https://www.af.mil/favicon.ico" alt="CJCS Logo" class="logo-img af-generic"><a href="https://www.jcs.mil/" target="_blank">Chairman of the Joint Chiefs of Staff</a> for seamless deployment.</li>
-        </ol>
-        <h3>Key Stakeholders</h3>
-        <table class="stakeholder-table">
-            <thead>
-                <tr>
-                    <th>Intelligence</th>
-                    <th>Investment</th>
-                    <th>Integration</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td><img src="https://www.af.mil/favicon.ico" alt="CASI Logo" class="logo-img af-generic"><a href="https://www.airuniversity.af.edu/CASI/" target="_blank">China Aerospace Studies Institute</a></td><td><span class="vc-placeholder-text">$</span><a href="https://www.8vc.com/" target="_blank">8VC</a></td><td><img src="https://www.congress.gov/favicon.ico" alt="Congress Logo" class="logo-img"><a href="https://www.congress.gov/" target="_blank">Congress</a></td></tr>
-                <tr><td><img src="https://www.af.mil/favicon.ico" alt="Taiwan Defense Group Logo" class="logo-img af-generic"><a href="https://www.ustaiwandefense.com/" target="_blank">Taiwan Defense Group</a></td><td><span class="vc-placeholder-text">$</span><a href="https://shieldcap.com/" target="_blank">Shield Capital</a></td><td><img src="https://www.af.mil/favicon.ico" alt="CJCS Logo" class="logo-img af-generic"><a href="https://www.jcs.mil/" target="_blank">Chairman of the Joint Chiefs of Staff (CJCS)</a></td></tr>
-                <tr><td><img src="https://www.af.mil/favicon.ico" alt="PACAF Logo" class="logo-img af-generic"><a href="https://www.pacaf.af.mil/" target="_blank">PACAF/A2</a></td><td><span class="vc-placeholder-text">$</span><a href="https://j2-capital.com/" target="_blank">J2 Capital</a></td><td><img src="https://www.af.mil/favicon.ico" alt="Dep SecWar Logo" class="logo-img af-generic"><a href="https://www.defense.gov/About/Deputy-Secretary-of-Defense/" target="_blank">Deputy Secretary of War (Dep SecWar)</a></td></tr>
-                <tr><td><img src="https://www.af.mil/favicon.ico" alt="NASIC Logo" class="logo-img af-generic"><a href="https://www.nasic.af.mil/" target="_blank">NASIC</a></td><td><span class="vc-placeholder-text">$</span><a href="https://www.hermeus.com/" target="_blank">Hermeus</a></td><td><img src="https://www.af.mil/favicon.ico" alt="AFMC Logo" class="logo-img af-generic"><a href="https://www.afmc.af.mil/" target="_blank">Air Force Materiel Command (AFMC/CC)</a></td></tr>
-                <tr><td><img src="https://www.af.mil/favicon.ico" alt="Checkmate Logo" class="logo-img af-generic"><a href="https://www.af.mil/News/Article-Display/Article/126656/checkmate-strategic-studies-group-supports-leaders/" target="_blank">Checkmate</a></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="AFLCMC Logo" class="logo-img af-generic"><a href="https://www.aflcmc.af.mil/" target="_blank">Air Force Life Cycle Management Center (AFMCLC/CC)</a></td></tr>
-                <tr><td><img src="https://www.af.mil/favicon.ico" alt="Strategic Studies Group Logo" class="logo-img af-generic"><a href="https://www.ssg.com.au/" target="_blank">Strategic Studies Group</a></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="PEOs Logo" class="logo-img af-generic"><a href="https://asc.army.mil/web/peos/" target="_blank">Program Executive Officers (PEOs)</a></td></tr>
-                <tr><td><img src="https://www.diu.mil/favicon.ico" alt="DIU Logo" class="logo-img"><a href="https://www.diu.mil/" target="_blank">DIU</a></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="SMLs Logo" class="logo-img af-generic"><a href="https://www.af.mil/About-Us/Air-Force-Senior-Leaders/" target="_blank">Senior Materiel Leaders (SMLs)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="MLs Logo" class="logo-img af-generic"><a href="https://www.af.mil/About-Us/Air-Force-Senior-Leaders/" target="_blank">Materiel Leaders (MLs)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="SPOs Logo" class="logo-img af-generic"><a href="https://www.dau.edu/glossary/system-program-office" target="_blank">System Program Offices (SPOs)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.diu.mil/favicon.ico" alt="DIU Logo" class="logo-img"><a href="https://www.diu.mil/" target="_blank">Defense Innovation Unit (DIU)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://afwerx.com/favicon.ico" alt="AFWERX Logo" class="logo-img"><a href="https://afwerx.com/" target="_blank">AFWERX</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="OSC Logo" class="logo-img af-generic"><a href="https://www.cto.mil/osc/" target="_blank">Office of Strategic Capital (OSC)</a></td></tr>
-                <tr><td></td><td></td><td><img src="https://www.af.mil/favicon.ico" alt="Labs Logo" class="logo-img af-generic"><a href="https://www.afrl.af.mil/" target="_blank">Labs (AFRL, National, UARCs, FFRDCs, etc)</a></td></tr>
-            </tbody>
-        </table>
-    </section>
+        <section id="cta" class="lead-capture">
+            <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
+            <p>Discover how to convert untapped capital into war-winning solutions.</p>
+            <a href="alchemy_blueprint.pdf" id="download-link" download>Download Blueprint</a>
+        </section>
 
-    <section id="cta" class="lead-capture">
-        <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
-        <p>Discover how to convert untapped capital into war-winning solutions.</p>
-        <a href="alchemy_blueprint.pdf" id="download-link" download>Download Blueprint</a>
-    </section>
+        <section id="success">
+            <h2>War-Winning Capabilities Delivered</h2>
+            <p>Alchemy turns your leadership into action, delivering innovations that secure America’s future.</p>
+            <a href="mailto:alchemy@wildbluehorizons.org" class="cta-button">Take Action Now</a>
+        </section>
 
-    <section id="success">
-        <h2>Success: War-Winning Capabilities Delivered</h2>
-        <p>Alchemy turns your leadership into action, delivering innovations that secure America’s future.</p>
-    </section>
+        <section id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">What is Alchemy's primary goal?</div>
+                <div class="faq-answer">Alchemy aims to transform $311B in untapped venture capital into war-winning capabilities by leveraging intelligence, investment, and integration across defense, government, and private sectors.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How does Alchemy benefit stakeholders?</div>
+                <div class="faq-answer">Stakeholders gain faster acquisition processes, innovative prototypes, and aligned strategies, empowering warfighters and strengthening national security through collaboration.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Who can participate in Alchemy?</div>
+                <div class="faq-answer">Alchemy welcomes leaders from defense, intelligence, venture capital, Congress, and military program offices to contribute expertise and resources.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What is the Blueprint about?</div>
+                <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for download.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How can I get involved?</div>
+                <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or download the Blueprint and reach out to discuss collaboration opportunities.</div>
+            </div>
+        </section>
 
-    <section id="failure">
-        <h2>Avoid Failure: Don’t Let Threats Grow</h2>
-        <p>Without Alchemy, untapped capital sits idle, widening gaps and risking defeat against adversaries.</p>
-        <a href="mailto:alchemy@wildbluehorizons.org" class="cta-button">Take Action Now</a>
-    </section>
-
-    <section id="faq">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-            <div class="faq-question">What is Alchemy's primary goal?</div>
-            <div class="faq-answer">Alchemy aims to transform $311B in untapped venture capital into war-winning capabilities by leveraging intelligence, investment, and integration across defense, government, and private sectors.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">How does Alchemy benefit stakeholders?</div>
-            <div class="faq-answer">Stakeholders gain faster acquisition processes, innovative prototypes, and aligned strategies, empowering warfighters and strengthening national security through collaboration.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Who can participate in Alchemy?</div>
-            <div class="faq-answer">Alchemy welcomes leaders from defense, intelligence, venture capital, Congress, and military program offices to contribute expertise and resources.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">What is the Blueprint about?</div>
-            <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for download.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">How can I get involved?</div>
-            <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or download the Blueprint and reach out to discuss collaboration opportunities.</div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Alchemy. Vision Venture Victory. <a href="mailto:alchemy@wildbluehorizons.org">Contact Us</a> | (719) 201-5582</p>
-    </footer>
+        <footer>
+            <p>&copy; 2025 Alchemy. Vision Venture Victory. <a href="mailto:alchemy@wildbluehorizons.org">Contact Us</a></p>
+        </footer>
+    </div>
 </body>
 </html>
