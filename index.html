@@ -69,7 +69,7 @@
         .content {
             width: 100%;
             padding: 0 20px;
-            box-sizing: border-box;
+            box exquisite-sizing: border-box;
             min-width: 0;
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -88,7 +88,7 @@
             margin: 20px 0;
             position: relative;
             z-index: 2;
-            background-image: url('https://images.unsplash.com/photo-1499188073299-5bd9060e044b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/hero.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -157,29 +157,32 @@
             margin: 20px 0;
             z-index: 2;
         }
-        #problem, #guide, #plan, #cta, #success {
+        #problem, #guide, #plan, #cta, #success, #timeline {
             background-color: rgba(255, 255, 255, 0.25);
         }
         #problem {
-            background-image: url('https://cdn.cfr.org/sites/default/files/styles/immersive_image_3_2_desktop_2x/public/image/2020/02/ChinaMilitary.webp');
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/problem.jpg');
         }
         #guide {
-            background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/guide.jpg');
         }
         #plan {
-            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/plan.jpg');
         }
         #cta {
-            background-image: url('https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/f16-fighter-jet-airplane-blueprints-design-turnpike.jpg');
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/cta.jpg');
             text-align: center;
         }
         #success {
-            background-image: url('https://images02.military.com/sites/default/files/styles/full/public/2019-01/joint-special-forces-team-1800.jpg?itok=44i2arTj');
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/success.jpg');
             text-align: center;
         }
-        #problem h2, #guide h2, #plan h2, #cta h2, #success h2,
-        #problem p, #guide p, #plan p, #cta p, #success p,
-        #problem a, #guide a, #plan a, #cta a, #success a {
+        #timeline {
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/timeline.jpg');
+        }
+        #problem h2, #guide h2, #plan h2, #cta h2, #success h2, #timeline h2,
+        #problem p, #guide p, #plan p, #cta p, #success p, #timeline p,
+        #problem a, #guide a, #plan a, #cta a, #success a, #timeline a {
             color: #fff;
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -190,8 +193,8 @@
             z-index: 5;
             pointer-events: auto;
         }
-        #problem p, #guide p, #cta p, #success p,
-        #cta a, #success a {
+        #problem p, #guide p, #cta p, #success p, #timeline p,
+        #cta a, #success a, #timeline a {
             font-size: 1.2em; /* Medium size for body text */
         }
         #guide a {
@@ -202,7 +205,7 @@
         }
         #faq {
             background-color: rgba(255, 255, 255, 0.25);
-            background-image: url('https://images.unsplash.com/photo-1600585154526-990d71papillomaviralis7c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/faq.jpg');
         }
         #faq h2 {
             color: #000;
@@ -346,7 +349,6 @@
             z-index: 5;
             pointer-events: auto;
         }
-
         @media (max-width: 768px) {
             .sidebar {
                 width: 100px;
@@ -376,7 +378,6 @@
                 padding: 40px 10px;
             }
         }
-
         @media (max-width: 480px) {
             .sidebar {
                 display: none;
@@ -429,7 +430,7 @@
             const sidebarLinks = document.querySelectorAll('.sidebar a');
 
             downloadLink.addEventListener('click', function(e) {
-                const pdfUrl = 'alchemy_blueprint.pdf';
+                const pdfUrl = 'https://patrickhighland1-maker.github.io/Alchemy.github.io/alchemy_blueprint.pdf';
                 this.setAttribute('href', pdfUrl);
                 this.setAttribute('download', '');
             });
@@ -462,7 +463,6 @@
                         const isActive = answer.classList.contains('active');
                         answer.classList.toggle('active');
                         expandButton.textContent = isActive ? '+' : '−';
-                        // Force reflow to ensure visibility change
                         answer.style.display = answer.classList.contains('active') ? 'block' : 'none';
                     });
                 } else {
@@ -474,11 +474,12 @@
 </head>
 <body>
     <div class="sidebar">
-        <img src="logo.png" alt="Alchemy Logo" class="hero-logo" loading="lazy">
+        <img src="https://patrickhighland1-maker.github.io/Alchemy.github.io/logo.jpg" alt="Alchemy Logo" class="hero-logo" loading="lazy">
         <ul>
             <li><a href="#problem">Problem</a></li>
             <li><a href="#guide">About Us</a></li>
             <li><a href="#plan">Plan</a></li>
+            <li><a href="#timeline">Timeline</a></li>
             <li><a href="#cta">Contact</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
@@ -499,7 +500,7 @@
 
             <section id="guide">
                 <h2>The Alchemists</h2>
-                <p>We are <a href="highland_bio.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="kenney_bio.pdf" download>Maj Eric “Slick” Kenney</a> from the Blue Horizons fellowship. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
+                <p>We are <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/highland_bio.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/kenney_bio.pdf" download>Maj Eric “Slick” Kenney</a> from the Chief of Staff of the Air Force’s Blue Horizons fellowship program – a strategic innovation think-and-do tank charged with developing solutions to the Air Force’s most pressing challenges. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
             </section>
 
             <section id="plan">
@@ -511,10 +512,15 @@
                 </div>
             </section>
 
+            <section id="timeline">
+                <h2>Timeline</h2>
+                <p>2023: Initiated Alchemy project with initial research. 2024: Expanded collaboration with defense and venture capital partners. 2025: Launched full integration with government bodies, targeting October deployment.</p>
+            </section>
+
             <section id="cta" class="lead-capture">
                 <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
                 <p>Discover how to convert untapped capital into war-winning solutions.</p>
-                <a href="alchemy_blueprint.pdf" id="download-link">Download Blueprint</a>
+                <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/alchemy_blueprint.pdf" id="download-link">Download Blueprint</a>
             </section>
 
             <section id="success">
@@ -539,11 +545,11 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">What is the Blueprint about?<span class="faq-expand">+</span></div>
-                    <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for <a href="alchemy_blueprint.pdf" download>download</a>.</div>
+                    <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles, available for <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/alchemy_blueprint.pdf" download>download</a>.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">How can I get involved?<span class="faq-expand">+</span></div>
-                    <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or <a href="alchemy_blueprint.pdf" download>download</a> the Blueprint and reach out to discuss collaboration opportunities.</div>
+                    <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/alchemy_blueprint.pdf" download>download</a> the Blueprint and reach out to discuss collaboration opportunities.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">My organization already does something like this... how is Alchemy different?<span class="faq-expand">+</span></div>
