@@ -18,49 +18,53 @@
             overflow-x: hidden;
             position: relative;
         }
-        .sidebar {
+        .top-nav {
             position: fixed;
             top: 0;
             left: 0;
-            width: 200px;
-            height: 100vh;
+            width: 100%;
             background-color: #000000;
             color: #ffd700;
-            padding: 20px 10px;
+            padding: 10px 20px;
             box-sizing: border-box;
             z-index: 1000;
-            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
-        .sidebar img {
-            width: 100px;
+        .top-nav img {
+            width: 80px;
             height: auto;
-            margin-bottom: 20px;
+            margin: 0 20px;
         }
-        .sidebar ul {
+        .top-nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
+            display: flex;
+            flex-wrap: wrap;
         }
-        .sidebar li {
-            margin: 15px 0;
+        .top-nav li {
+            margin: 0 15px;
         }
-        .sidebar a {
+        .top-nav a {
             color: #ffd700;
             text-decoration: none;
             font-size: 1em;
-            display: block;
             padding: 5px;
             word-wrap: break-word;
             overflow-wrap: break-word;
+            text-align: center;
         }
-        .sidebar a:hover, .sidebar a.active {
+        .top-nav a:hover, .top-nav a.active {
             background-color: #333;
         }
         .container {
             position: relative;
-            margin-left: 200px;
+            margin-top: 80px;
             width: 100%;
-            max-width: calc(100% - 200px);
+            max-width: 100%;
             box-sizing: border-box;
             flex: 1;
             display: flex;
@@ -69,14 +73,19 @@
         .content {
             width: 100%;
             padding: 0 20px;
-            box exquisite-sizing: border-box;
+            box-sizing: border-box;
             min-width: 0;
             word-wrap: break-word;
             overflow-wrap: break-word;
             flex: 1;
+            background-color: #000;
+            border-top: 1px solid #000; /* Top border only */
+            border-bottom: 1px solid #000; /* Bottom border only */
+            border-left: none;
+            border-right: none;
         }
         .hero {
-            background-color: rgba(255, 255, 255, 0.25);
+            background-color: #000;
             color: #fff;
             text-align: center;
             padding: 40px;
@@ -84,7 +93,10 @@
             box-sizing: border-box;
             word-wrap: break-word;
             overflow-wrap: break-word;
-            border: 1px solid #ddd;
+            border-top: 1px solid #000; /* Top border only */
+            border-bottom: 1px solid #000; /* Bottom border only */
+            border-left: none;
+            border-right: none;
             margin: 20px 0;
             position: relative;
             z-index: 2;
@@ -93,7 +105,7 @@
             background-position: center;
         }
         .hero h2 {
-            font-size: 3em; /* Largest size for branding */
+            font-size: 3em;
             margin: 0;
         }
         .hero p, .hero a {
@@ -105,12 +117,13 @@
             position: relative;
             z-index: 5;
             pointer-events: auto;
+            text-align: center;
         }
         .hero p:first-child {
-            font-size: 3em; /* Largest size per request */
+            font-size: 3em;
         }
         .hero p:nth-child(2) {
-            font-size: 1.8em; /* Large size per request */
+            font-size: 1.8em;
         }
         .cta-button {
             background-color: #ffd700;
@@ -127,6 +140,7 @@
             position: relative;
             z-index: 5;
             pointer-events: auto;
+            text-align: center;
         }
         #download-link {
             background-color: #ffd700;
@@ -143,6 +157,7 @@
             position: relative;
             z-index: 3;
             pointer-events: auto;
+            text-align: center;
         }
         section {
             padding: 40px;
@@ -153,12 +168,15 @@
             position: relative;
             background-size: cover;
             background-position: center;
-            border: 1px solid #ddd;
+            border-top: 1px solid #000; /* Top border only */
+            border-bottom: 1px solid #000; /* Bottom border only */
+            border-left: none;
+            border-right: none;
             margin: 20px 0;
             z-index: 2;
         }
         #problem, #guide, #plan, #cta, #success, #timeline {
-            background-color: rgba(255, 255, 255, 0.25);
+            background-color: #000;
         }
         #problem {
             background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/problem.jpg');
@@ -186,54 +204,57 @@
             color: #fff;
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            font-size: 1.8em; /* Large size for headings */
+            font-size: 1.8em;
             word-wrap: break-word;
             overflow-wrap: break-word;
             position: relative;
             z-index: 5;
             pointer-events: auto;
+            text-align: center;
         }
         #problem p, #guide p, #cta p, #success p, #timeline p,
         #cta a, #success a, #timeline a {
-            font-size: 1.2em; /* Medium size for body text */
+            font-size: 1.2em;
         }
         #guide a {
-            font-size: 0.9em; /* Smallest size per request */
+            font-size: 0.9em;
         }
         #plan p {
-            font-size: 1.2em; /* Medium size for plan text */
+            font-size: 1.2em;
         }
         #faq {
-            background-color: rgba(255, 255, 255, 0.25);
+            background-color: #000;
             background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/faq.jpg');
         }
         #faq h2 {
             color: #000;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-size: 0.9em; /* Smallest size per request */
+            font-size: 0.9em;
             word-wrap: break-word;
             overflow-wrap: break-word;
             position: relative;
             z-index: 5;
             pointer-events: auto;
+            text-align: center;
         }
         #faq .faq-question, #faq .faq-answer {
             color: #000;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-size: 0.9em; /* Smallest size per request */
+            font-size: 0.9em;
             word-wrap: break-word;
             overflow-wrap: break-word;
             position: relative;
             z-index: 5;
             pointer-events: auto;
+            text-align: center;
         }
         #faq .faq-expand {
             color: #000;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-size: 0.9em; /* Smallest size per request */
+            font-size: 0.9em;
             margin-left: 10px;
             cursor: pointer;
             word-wrap: break-word;
@@ -241,6 +262,7 @@
             position: relative;
             z-index: 5;
             pointer-events: auto;
+            text-align: center;
         }
         section::before {
             content: '';
@@ -258,6 +280,7 @@
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             pointer-events: auto;
+            text-align: center;
         }
         footer {
             background-color: #000;
@@ -267,15 +290,20 @@
             width: 100%;
             box-sizing: border-box;
             position: relative;
-            left: 0;
-            margin-left: 0;
             z-index: 1;
-            font-size: 0.9em; /* Small size for footer */
+            font-size: 0.9em;
+            border-top: 1px solid #000; /* Top border only */
+            border-bottom: 1px solid #000; /* Bottom border only */
+            border-left: none;
+            border-right: none;
         }
         .lead-capture {
-            background-color: #fff;
+            background-color: #000;
             padding: 40px;
-            border: 1px solid #ddd;
+            border-top: 1px solid #000; /* Top border only */
+            border-bottom: 1px solid #000; /* Bottom border only */
+            border-left: none;
+            border-right: none;
             margin: 20px 0;
             max-width: 100%;
             text-align: center;
@@ -286,6 +314,15 @@
             position: relative;
             z-index: 2;
         }
+        .lead-capture h2, .lead-capture p, .lead-capture a {
+            color: #ffd700;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 3;
+            pointer-events: auto;
+            text-align: center;
+        }
         .lead-capture a {
             background-color: #ffd700;
             color: #000;
@@ -294,13 +331,14 @@
             font-weight: bold;
             border-radius: 5px;
             display: inline-block;
+            margin: 0 auto;
             word-wrap: break-word;
             overflow-wrap: break-word;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 3;
             pointer-events: auto;
-            font-size: 1.2em; /* Medium size for consistency */
+            font-size: 1.2em;
         }
         .logo-img {
             width: 30px;
@@ -323,6 +361,7 @@
             position: relative;
             z-index: 3;
             pointer-events: auto;
+            text-align: center;
         }
         #download-link {
             background-color: #ffd700;
@@ -339,7 +378,7 @@
             position: relative;
             z-index: 3;
             pointer-events: auto;
-            font-size: 1.2em; /* Medium size for consistency */
+            font-size: 1.2em;
         }
         .faq-item {
             margin-bottom: 20px;
@@ -350,20 +389,28 @@
             pointer-events: auto;
         }
         @media (max-width: 768px) {
-            .sidebar {
-                width: 100px;
+            .top-nav {
+                padding: 10px;
             }
-            .container, footer {
-                margin-left: 100px;
+            .top-nav img {
+                width: 60px;
+                margin: 0 10px;
+            }
+            .top-nav ul {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .top-nav li {
+                margin: 5px 10px;
+            }
+            .top-nav a {
+                font-size: 0.8em;
+            }
+            .container {
+                margin-top: 60px;
             }
             .content {
                 padding: 0 10px;
-            }
-            .sidebar a {
-                font-size: 0.8em;
-            }
-            .sidebar img {
-                width: 80px;
             }
             .hero {
                 padding: 40px 10px;
@@ -379,11 +426,26 @@
             }
         }
         @media (max-width: 480px) {
-            .sidebar {
-                display: none;
+            .top-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .top-nav img {
+                width: 50px;
+                margin: 10px 0;
+            }
+            .top-nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .top-nav li {
+                margin: 5px 0;
+            }
+            .top-nav a {
+                font-size: 0.9em;
             }
             .container {
-                margin-left: 0;
+                margin-top: 120px;
                 width: 100vw;
                 max-width: none;
             }
@@ -417,7 +479,6 @@
                 padding: 10px 20px;
             }
             footer {
-                margin-left: 0;
                 width: 100vw;
                 box-sizing: border-box;
             }
@@ -427,7 +488,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const downloadLink = document.getElementById('download-link');
             const faqQuestions = document.querySelectorAll('.faq-item .faq-question');
-            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            const sidebarLinks = document.querySelectorAll('.top-nav a');
 
             downloadLink.addEventListener('click', function(e) {
                 const pdfUrl = 'https://patrickhighland1-maker.github.io/Alchemy.github.io/alchemy_blueprint.pdf';
@@ -473,7 +534,7 @@
     </script>
 </head>
 <body>
-    <div class="sidebar">
+    <div class="top-nav">
         <img src="https://patrickhighland1-maker.github.io/Alchemy.github.io/logo.jpg" alt="Alchemy Logo" class="hero-logo" loading="lazy">
         <ul>
             <li><a href="#problem">Problem</a></li>
