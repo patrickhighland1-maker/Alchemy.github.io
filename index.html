@@ -5,38 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Alchemy: Turn Untapped Capital into War-Winning Power</title>
     <style>
-        html {
-            background-color: #000000; /* Black background for viewport */
+        html, body, .sidebar, .container, .content, section, .lead-capture, footer {
+            background-color: #000;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000000; /* Black background to eliminate gray sliver */
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
             position: relative;
         }
         .sidebar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            max-width: 100%;
-            background-color: #000000;
-            color: #ffd700;
             padding: 10px 0;
-            box-sizing: border-box;
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            overflow-x: hidden;
+            color: #ffd700;
         }
         .sidebar img {
             width: 60px;
@@ -51,135 +48,46 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        .sidebar li {
-            margin: 0;
-        }
         .sidebar a {
             color: #ffd700;
             text-decoration: none;
             font-size: 1em;
             padding: 5px 10px;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+            word-break: break-word;
         }
         .sidebar a:hover, .sidebar a.active {
             background-color: #333;
         }
         .container {
-            position: relative;
             margin-top: 80px;
-            width: 100%;
-            box-sizing: border-box;
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
         }
         .content {
-            width: 100%;
-            max-width: 100%;
-            padding: 0;
-            box-sizing: border-box;
-            min-width: 0;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
             flex: 1;
-            overflow-x: hidden;
-            background-color: #000000;
+        }
+        .hero, section, .lead-capture {
+            padding: 40px 0;
+            border: 1px solid #000;
+            border-left: 0;
+            border-right: 0;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background-size: cover;
+            background-position: center;
+        }
+        .hero, #problem, #guide, #cta, #success, #plan {
+            color: #fff;
+            background-color: #000;
+        }
+        #faq, #timeline {
+            background-color: #000;
         }
         .hero {
-            background-color: #000000;
-            color: #fff;
-            text-align: center;
-            padding: 40px 0;
-            width: 100%;
-            box-sizing: border-box;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            border-top: 1px solid #000000;
-            border-bottom: 1px solid #000000;
-            border-left: 0;
-            border-right: 0;
-            margin: 20px 0;
-            position: relative;
-            z-index: 2;
             background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/hero.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        .hero h2 {
-            font-size: 3em;
-            margin: 0;
-        }
-        .hero p, .hero a {
-            color: #fff;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            position: relative;
-            z-index: 5;
-            pointer-events: auto;
-        }
-        .hero p:first-child {
-            font-size: 3em;
-        }
-        .hero p:nth-child(2) {
-            font-size: 1.8em;
-        }
-        .cta-button {
-            background-color: #ffd700;
-            color: #000;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            display: inline-block;
-            margin: 0 auto;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 5;
-            pointer-events: auto;
-        }
-        #download-link {
-            background-color: #ffd700;
-            color: #000;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            margin-top: 10px;
-            display: inline-block;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 3;
-            pointer-events: auto;
-        }
-        section {
-            padding: 40px 0;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            position: relative;
-            background-size: cover;
-            background-position: center;
-            border-top: 1px solid #000000;
-            border-bottom: 1px solid #000000;
-            border-left: 0;
-            border-right: 0;
-            margin: 20px 0;
-            z-index: 2;
-            text-align: center;
-            overflow-x: hidden;
-        }
-        #problem, #guide, #plan, #success, #timeline, #cta, #tradeoffs {
-            background-color: #000000;
         }
         #problem {
             background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/problem.jpg');
@@ -187,68 +95,59 @@
         #guide {
             background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/guide.jpg');
         }
-        #plan {
-            background-color: #000000;
-        }
         #cta {
             background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/cta.jpg');
         }
         #success {
             background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/success.jpg');
         }
-        #timeline {
-            background-color: #000000;
-        }
-        #tradeoffs {
-            background-color: #000000;
-        }
         #faq {
-            background-color: #000000;
             background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/faq.jpg');
         }
-        section img {
-            width: 100vw;
-            max-width: none;
-            height: auto;
-            margin: 20px 0;
-            display: block;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
+        #plan {
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/plan.jpg');
         }
-        #problem h2, #guide h2, #cta h2, #success h2, #faq h2,
-        #problem p, #guide p, #cta p, #success p,
-        #problem a, #guide a, #cta a, #success a {
-            color: #fff;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            font-size: 1.8em;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+        #timeline {
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/time.jpg');
+        }
+        h2, p, a, .faq-question, .faq-answer, .faq-expand {
             position: relative;
             z-index: 5;
             pointer-events: auto;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            word-break: break-word;
         }
-        #problem p, #guide p, #cta p, #success p,
-        #cta a, #success a {
+        .hero h2 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .hero p:first-child {
+            font-size: 3em;
+        }
+        .hero p:nth-child(2), #problem h2, #guide h2, #cta h2, #success h2, #faq h2, #plan h2, #timeline h2 {
+            font-size: 1.8em;
+        }
+        #problem p, #guide p, #cta p, #success p, .cta-button, #cta a, #success a, #plan p, #timeline p, #faq .faq-question, #faq .faq-answer, #faq .faq-expand {
             font-size: 1.2em;
         }
-        #guide a {
-            font-size: 0.9em;
+        a {
+            color: #ffd700;
         }
-        #faq h2 {
-            font-size: 1.8em;
+        .cta-button, .lead-capture a {
+            background-color: #ffd700;
+            color: #000;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 0 auto;
         }
-        #faq .faq-question, #faq .faq-answer {
-            color: #fff;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            font-size: 0.9em;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            position: relative;
-            z-index: 5;
-            pointer-events: auto;
+        .lead-capture a {
+            margin-top: 10px;
+        }
+        #faq h2, #faq .faq-question, #faq .faq-answer, #faq .faq-expand, #timeline h2, #timeline p {
+            color: #000;
         }
         #faq .faq-answer {
             display: none;
@@ -257,120 +156,17 @@
             display: block;
         }
         #faq .faq-expand {
-            color: #fff;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            font-size: 0.9em;
             margin-left: 10px;
             cursor: pointer;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            position: relative;
-            z-index: 5;
-            pointer-events: auto;
         }
-        section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000000;
-            z-index: 1;
-            opacity: 0.3;
-        }
-        h2, p, a {
-            position: relative;
-            z-index: 3;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            pointer-events: auto;
+        .faq-item {
+            margin-bottom: 20px;
         }
         footer {
-            background-color: #000000;
-            color: #ffd700;
-            text-align: center;
             padding: 20px 0;
-            width: 100%;
-            box-sizing: border-box;
-            position: relative;
-            z-index: 1;
+            color: #ffd700;
             font-size: 0.9em;
-        }
-        .lead-capture {
-            background-color: #000000;
-            padding: 40px 0;
-            border-top: 1px solid #000000;
-            border-bottom: 1px solid #000000;
-            border-left: 0;
-            border-right: 0;
-            margin: 20px 0;
-            max-width: 100%;
             text-align: center;
-            width: 100%;
-            box-sizing: border-box;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            position: relative;
-            z-index: 2;
-            overflow-x: hidden;
-        }
-        .lead-capture a {
-            background-color: #ffd700;
-            color: #000;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            display: inline-block;
-            margin: 0 auto;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 3;
-            pointer-events: auto;
-            font-size: 1.2em;
-        }
-        .logo-img {
-            width: 30px;
-            height: 30px;
-            margin-right: 5px;
-            vertical-align: middle;
-            opacity: 0.5;
-        }
-        .af-generic, .vc-placeholder {
-            opacity: 1;
-        }
-        .vc-placeholder-text {
-            font-size: 24px;
-            color: #000;
-            vertical-align: middle;
-            margin-right: 5px;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 3;
-            pointer-events: auto;
-        }
-        #download-link {
-            background-color: #ffd700;
-            color: #000;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            margin-top: 10px;
-            display: inline-block;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 3;
-            pointer-events: auto;
-            font-size: 1.2em;
         }
 
         @media (max-width: 768px) {
@@ -391,19 +187,13 @@
             .container {
                 margin-top: 60px;
             }
-            .content {
-                padding: 0;
-            }
-            .hero {
-                padding: 40px 0;
-            }
             .hero h2 {
                 font-size: 2em;
             }
             .hero p {
                 font-size: 1.5em;
             }
-            section {
+            section, .lead-capture {
                 padding: 40px 0;
             }
         }
@@ -422,10 +212,7 @@
                 margin-bottom: 5px;
             }
             .sidebar ul {
-                flex-wrap: wrap;
                 gap: 5px;
-                display: flex;
-                align-items: center;
             }
             .sidebar a {
                 font-size: 0.8em;
@@ -434,17 +221,8 @@
             .container {
                 margin-top: 60px;
             }
-            .content {
-                padding: 0;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-                overflow-x: hidden;
-            }
-            .hero {
+            .hero, section, .lead-capture {
                 padding: 30px 0;
-                width: 100%;
-                max-width: 100%;
             }
             .hero h2 {
                 font-size: 2.5em;
@@ -452,75 +230,46 @@
             .hero p {
                 font-size: 1.2em;
             }
-            .lead-capture {
-                padding: 20px 0;
-                max-width: 100%;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            section {
-                padding: 30px 0;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-            .cta-button {
+            .cta-button, .lead-capture a {
                 padding: 10px 20px;
-            }
-            #download-link {
-                padding: 10px 20px; /* Match .cta-button in mobile view */
-            }
-            footer {
-                margin-left: 0;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
             }
         }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const downloadLink = document.getElementById('download-link');
-            const faqQuestions = document.querySelectorAll('.faq-item .faq-question');
-            const sidebarLinks = document.querySelectorAll('.sidebar a');
+        document.addEventListener("DOMContentLoaded", function() {
+            const downloadLink = document.getElementById("download-link");
+            const faqQuestions = document.querySelectorAll(".faq-item .faq-question");
+            const sidebarLinks = document.querySelectorAll(".sidebar a");
 
-            downloadLink.addEventListener('click', function(e) {
-                const meetingUrl = 'mailto:alchemy@wildbluehorizons.org?subject=Request%20Blueprint';
-                this.setAttribute('href', meetingUrl);
+            downloadLink.addEventListener("click", function() {
+                this.href = "mailto:alchemy@wildbluehorizons.org?subject=Request%20the%20Blueprint";
             });
 
             function setActiveLink() {
-                let scrollPosition = window.scrollY;
+                const scrollPosition = window.scrollY;
                 sidebarLinks.forEach(link => {
-                    const href = link.getAttribute('href').substring(1);
-                    const section = document.getElementById(href);
+                    const section = document.getElementById(link.getAttribute("href").slice(1));
                     if (section) {
-                        const sectionTop = section.offsetTop - 100;
-                        const sectionBottom = sectionTop + section.offsetHeight;
-                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                            link.classList.add('active');
-                        } else {
-                            link.classList.remove('active');
-                        }
+                        const top = section.offsetTop - 100;
+                        const bottom = top + section.offsetHeight;
+                        link.classList.toggle("active", scrollPosition >= top && scrollPosition < bottom);
                     }
                 });
             }
 
-            window.addEventListener('scroll', setActiveLink);
+            window.addEventListener("scroll", setActiveLink);
             setActiveLink();
 
             faqQuestions.forEach(question => {
-                const expandButton = question.querySelector('.faq-expand');
+                const expandButton = question.querySelector(".faq-expand");
                 const answer = question.nextElementSibling;
                 if (expandButton && answer) {
-                    question.addEventListener('click', function() {
-                        const isActive = answer.classList.contains('active');
-                        answer.classList.toggle('active');
-                        expandButton.textContent = isActive ? '+' : '−';
-                        answer.style.display = answer.classList.contains('active') ? 'block' : 'none';
+                    question.addEventListener("click", () => {
+                        const isActive = answer.classList.contains("active");
+                        answer.classList.toggle("active");
+                        expandButton.textContent = isActive ? "+" : "−";
+                        answer.style.display = isActive ? "none" : "block";
                     });
-                } else {
-                    console.error('FAQ element structure issue:', question, answer);
                 }
             });
         });
@@ -528,12 +277,11 @@
 </head>
 <body>
     <div class="sidebar">
-        <img src="https://patrickhighland1-maker.github.io/Alchemy.github.io/logo.jpg" alt="Alchemy Logo" class="hero-logo" loading="lazy">
+        <img src="https://patrickhighland1-maker.github.io/Alchemy.github.io/logo.jpg" alt="Alchemy Logo" loading="lazy">
         <ul>
             <li><a href="#problem">Problem</a></li>
             <li><a href="#guide">About Us</a></li>
             <li><a href="#plan">Plan</a></li>
-            <li><a href="#tradeoffs">Tradeoffs</a></li>
             <li><a href="#cta">Contact</a></li>
             <li><a href="#success">Success</a></li>
             <li><a href="#timeline">Timeline</a></li>
@@ -550,27 +298,26 @@
             </section>
 
             <section id="problem">
-                <h2>The Problem: Acquisition Delays Cost Lives</h2>
-                <p>As a defense, intelligence, or venture capital leader, you struggle with slow acquisitions—adversaries like the PRC outpace us, turning innovation gaps into threats while budgets and schedules clash.</p>
+                <h2>The Problem: Untenable Tradeoffs</h2>
+                <p>As leaders in defense, intelligence, and venture capital, we face untenable tradeoffs between budgets, schedules, and performance. Meanwhile, adversaries like the PRC outpace us, turning innovation gaps into national security threats.</p>
             </section>
 
             <section id="guide">
                 <h2>The Alchemists</h2>
-                <p>We are <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/highland_bio.pdf" download>Lt Col Patrick “Dice” Highland</a>, <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/kenney_bio.pdf" download>Maj Eric “Slick” Kenney</a> from the Chief of Staff of the Air Force’s Blue Horizons fellowship program – a strategic innovation think-and-do tank charged with developing solutions to the Air Force’s most pressing challenges. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
+                <p>We are <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/highland_bio.pdf" download>Lt Col Patrick "Dice" Highland, PhD</a>, <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/kenney_bio.pdf" download>Maj Eric "Slick" Kenney</a> from the Chief of Staff of the Air Force’s Blue Horizons fellowship program – a strategic innovation think-and-do tank charged with developing solutions to the Air Force’s most pressing challenges. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
             </section>
 
             <section id="plan">
-                <img src="https://patrickhighland1-maker.github.io/Alchemy.github.io/process.jpg" alt="Process Image" loading="lazy">
-            </section>
-
-            <section id="tradeoffs">
-                <img src="https://patrickhighland1-maker.github.io/Alchemy.github.io/tradeoffs.jpg" alt="Tradeoffs Image" loading="lazy">
+                <h2>The Plan: Whole-of-Society Victory</h2>
+                <p><strong>Intelligence:</strong> Leverage all-source data from Defense Research Institutions and Military Intelligence Units to pinpoint gaps.</p>
+                <p><strong>Investment:</strong> Guides Venture Capital Firms to invest in funding DoD prototypes, accelerating innovation.</p>
+                <p><strong>Integration:</strong> Collaborate with Government Bodies and Military Leadership for seamless deployment, embodying a whole-of-government approach.</p>
             </section>
 
             <section id="cta" class="lead-capture">
                 <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
                 <p>Discover how to convert untapped capital into war-winning solutions.</p>
-                <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20Blueprint" id="download-link">Request Blueprint</a>
+                <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20the%20Blueprint" id="download-link">Request the Blueprint</a>
             </section>
 
             <section id="success">
@@ -580,7 +327,19 @@
             </section>
 
             <section id="timeline">
-                <img src="https://patrickhighland1-maker.github.io/Alchemy.github.io/timeline.jpg" alt="Timeline Image" loading="lazy">
+                <h2>Timeline</h2>
+                <p>Sep 25 – Alchemy Approved as a Blue Horizons Project</p>
+                <p>Oct 25 – Market Research with Key Stakeholders</p>
+                <p>Oct 25 – Partner with a Key Stakeholder</p>
+                <p>Nov 25 – Identify or Create Marketplace</p>
+                <p>Nov 25 – Publish Startup Milestones</p>
+                <p>Nov 25 – Select Two Blue Horizons Projects</p>
+                <p>Nov 25 – Select Three Non-Blue Horizons Test Cases</p>
+                <p>Dec 25 – Startup Companies Start Working</p>
+                <p>Feb 25 – Venture Capital Starts Investing</p>
+                <p>Feb 25 – Senior Leader Engagements</p>
+                <p>Apr 25 – Two to Five Test Cases Complete Prototyping</p>
+                <p>May 26 – Briefing to the Chief of Staff on the United States Air Force</p>
             </section>
 
             <section id="faq">
@@ -599,11 +358,11 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">What is the Blueprint about?<span class="faq-expand">+</span></div>
-                    <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles. <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20Blueprint">Request Blueprint</a> to learn more.</div>
+                    <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles. <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20the%20Blueprint">Request the Blueprint</a> to learn more.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">How can I get involved?<span class="faq-expand">+</span></div>
-                    <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20Blueprint">request Blueprint</a> to discuss collaboration opportunities.</div>
+                    <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20the%20Blueprint">request the Blueprint</a> to discuss collaboration opportunities.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">My organization already does something like this... how is Alchemy different?<span class="faq-expand">+</span></div>
