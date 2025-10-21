@@ -54,7 +54,6 @@
             font-size: 1em;
             padding: 5px 10px;
             word-break: break-word;
-       突然
         }
         .sidebar a:hover, .sidebar a.active {
             background-color: #333;
@@ -94,8 +93,8 @@
         #success { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/success.JPG'); }
         #faq { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/faq.jpg'); }
         #plan { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/plan.jpg'); }
-        
-        /* TIMELINE – FULL WIDTH, NO BOXING */
+
+        /* TIMELINE – HORIZONTAL ON DESKTOP */
         #timeline {
             width: 100%;
             padding: 60px 20px;
@@ -105,31 +104,99 @@
             background-repeat: no-repeat;
             position: relative;
         }
-        .timeline-item {
-            margin: 30px 0;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity .5s ease, transform .5s ease;
+        .timeline-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-item {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
         .timeline-content {
             background: rgba(0,0,0,0.8);
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
-            width: 60%;
-            max-width: 600px;
-            margin: 0 auto;
             text-align: center;
             color: #fff;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .timeline-content p {
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin: 0;
         }
-        .timeline-content:hover { transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,.5); }
+        .timeline-content:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(255,215,0,0.3); }
         #timeline h2 { text-align: center; margin-bottom: 40px; color: #fff; }
+
+        /* PLAN SECTION – ALWAYS 3 COLUMNS */
+        .plan-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0,0,0,0.8);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .plan-step {
+            background: rgba(255,215,0,0.1);
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .plan-step:hover {
+            background: rgba(255,215,0,0.2);
+            box-shadow: 0 0 15px rgba(255,215,0,0.3);
+        }
+        .plan-step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #fff;
+        }
+        .plan-step-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+            color: #ffd700;
+        }
+        .plan-step-icon.rotated {
+            transform: rotate(180deg);
+        }
+        .plan-step-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 10px;
+        }
+        .plan-step-content.expanded {
+            max-height: 200px;
+        }
+        .plan-step-content p {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-size: 1.1em;
+            margin: 0;
+        }
 
         h2, p, a, .faq-question, .faq-answer, .faq-expand {
             position: relative;
@@ -168,7 +235,11 @@
             .sidebar a { font-size: .9em; padding: 5px 8px; }
             .container { margin-top: 60px; }
             section, .lead-capture { padding: 40px 0; }
-            .timeline-content { width: 80%; padding: 12px; }
+            .plan-section { grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 15px; }
+            .plan-step { padding: 15px; }
+            .plan-step-header { font-size: 1.2em; }
+            .timeline-container { flex-direction: column; padding: 15px; }
+            .timeline-item { max-width: 100%; }
         }
         @media (max-width: 480px) {
             .sidebar img { width: 40px; margin-right: 5px; margin-bottom: 5px; }
@@ -178,7 +249,9 @@
             .hero, section, .lead-capture { padding: 30px 0; }
             #timeline h2 { font-size: 1.6em; }
             .timeline-content p { font-size: 1em; }
-            .timeline-content { width: 90%; padding: 10px; }
+            .plan-section { gap: 10px; }
+            .plan-step-header { font-size: 1.1em; }
+            .plan-step-content p { font-size: 1em; }
         }
     </style>
     <script>
@@ -186,7 +259,9 @@
             const faqQuestions = document.querySelectorAll(".faq-item .faq-question");
             const sidebarLinks = document.querySelectorAll(".sidebar a");
             const timelineItems = document.querySelectorAll(".timeline-item");
+            const planSteps = document.querySelectorAll(".plan-step");
 
+            // Sidebar active link
             function setActiveLink() {
                 const scrollPos = window.scrollY;
                 sidebarLinks.forEach(l => {
@@ -201,6 +276,7 @@
             window.addEventListener("scroll", setActiveLink);
             setActiveLink();
 
+            // FAQ toggle
             faqQuestions.forEach(q => {
                 const btn = q.querySelector(".faq-expand");
                 const ans = q.nextElementSibling;
@@ -213,9 +289,39 @@
                 }
             });
 
+            // Timeline animation
             const observer = new IntersectionObserver(e => e.forEach(en => en.isIntersecting && en.target.classList.add("visible")), { threshold: .1 });
             timelineItems.forEach(i => observer.observe(i));
 
+            // INTERACTIVE PLAN SECTION
+            planSteps.forEach(step => {
+                const header = step.querySelector('.plan-step-header');
+                const content = step.querySelector('.plan-step-content');
+                const icon = step.querySelector('.plan-step-icon');
+
+                const toggle = () => {
+                    const isExpanded = content.classList.contains('expanded');
+                    planSteps.forEach(s => {
+                        if (s !== step) {
+                            s.querySelector('.plan-step-content').classList.remove('expanded');
+                            s.querySelector('.plan-step-icon').classList.remove('rotated');
+                        }
+                    });
+                    content.classList.toggle('expanded', !isExpanded);
+                    icon.classList.toggle('rotated', !isExpanded);
+                };
+
+                step.addEventListener('click', toggle);
+                header.setAttribute('tabindex', '0');
+                header.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggle();
+                    }
+                });
+            });
+
+            // Newsletter form
             const form = document.querySelector('#cta form');
             if (form) {
                 form.addEventListener('submit', function (e) {
@@ -270,12 +376,38 @@
                 <p>Despite abundant talent, the defense acquisition ecosystem is fragmented, with players using their own playbooks. This leaves venture capital and startup companies sidelined, confused about their role, like a bad version of "Who's on First?"</p>
             </section>
 
-            <!-- PLAN -->
+            <!-- PLAN – ALWAYS 3 COLUMNS -->
             <section id="plan">
                 <h2>The Plan: A Three-Part Process</h2>
-                <p><strong>Synthesize:</strong> Combine POM and available intelligence to articulate clear, unclassified technology demand signals to industry.</p>
-                <p><strong>Engage:</strong> Pull venture capital's billions and startup talent into the defense acquisition game.</p>
-                <p><strong>Sync:</strong> Align with government acquisition processes to ensure seamless transition of solutions.</p>
+                <div class="plan-section">
+                    <div class="plan-step" tabindex="0">
+                        <div class="plan-step-header">
+                            <span>Illuminate</span>
+                            <span class="plan-step-icon">▼</span>
+                        </div>
+                        <div class="plan-step-content">
+                            <p>Combine POM and available intelligence to articulate clear, unclassified technology demand signals to industry.</p>
+                        </div>
+                    </div>
+                    <div class="plan-step" tabindex="0">
+                        <div class="plan-step-header">
+                            <span>Invest</span>
+                            <span class="plan-step-icon">▼</span>
+                        </div>
+                        <div class="plan-step-content">
+                            <p>Pull venture capital's billions and startup talent into the defense acquisition game.</p>
+                        </div>
+                    </div>
+                    <div class="plan-step" tabindex="0">
+                        <div class="plan-step-header">
+                            <span>Integrate</span>
+                            <span class="plan-step-icon">▼</span>
+                        </div>
+                        <div class="plan-step-content">
+                            <p>Align with government acquisition processes to ensure seamless transition of solutions.</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- CTA / NEWSLETTER -->
@@ -309,14 +441,16 @@
                    class="cta-button">Take Action Now</a>
             </section>
 
-            <!-- TIMELINE -->
+            <!-- TIMELINE – HORIZONTAL -->
             <section id="timeline">
                 <h2>Timeline</h2>
-                <div class="timeline-item"><div class="timeline-content"><p>Sep 25 – Alchemy approved as Blue Horizons project</p></div></div>
-                <div class="timeline-item"><div class="timeline-content"><p>Nov 25 – Create marketplace and select test projects</p></div></div>
-                <div class="timeline-item"><div class="timeline-content"><p>Dec 25 – Startups begin work on prototypes</p></div></div>
-                <div class="timeline-item"><div class="timeline-content"><p>Feb 25 – Venture capital investment and senior leader engagements</p></div></div>
-                <div class="timeline-item"><div class="timeline-content"><p>May 26 – Brief Air Force Chief of Staff on prototype outcomes</p></div></div>
+                <div class="timeline-container">
+                    <div class="timeline-item"><div class="timeline-content"><p>Sep 25 – Alchemy approved as Blue Horizons project</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>Nov 25 – Create marketplace and select test projects</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>Dec 25 – Startups begin work on prototypes</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>Feb 25 – Venture capital investment and senior leader engagements</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>May 26 – Brief Air Force Chief of Staff on prototype outcomes</p></div></div>
+                </div>
             </section>
 
             <!-- ABOUT US -->
