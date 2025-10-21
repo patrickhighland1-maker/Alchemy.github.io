@@ -54,6 +54,7 @@
             font-size: 1em;
             padding: 5px 10px;
             word-break: break-word;
+       突然
         }
         .sidebar a:hover, .sidebar a.active {
             background-color: #333;
@@ -93,7 +94,42 @@
         #success { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/success.JPG'); }
         #faq { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/faq.jpg'); }
         #plan { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/plan.jpg'); }
-        #timeline { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/time.jpg'); }
+        
+        /* TIMELINE – FULL WIDTH, NO BOXING */
+        #timeline {
+            width: 100%;
+            padding: 60px 20px;
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/time.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        .timeline-item {
+            margin: 30px 0;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-content {
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            width: 60%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+        }
+        .timeline-content p {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-size: 1.2em;
+            margin: 0;
+        }
+        .timeline-content:hover { transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,.5); }
+        #timeline h2 { text-align: center; margin-bottom: 40px; color: #fff; }
 
         h2, p, a, .faq-question, .faq-answer, .faq-expand {
             position: relative;
@@ -126,33 +162,6 @@
         footer { padding: 20px 0; color: #ffd700; font-size: 0.9em; text-align: center; }
         footer p.disclaimer { margin-top: 10px; }
 
-        /* ---------- TIMELINE – NO LINE, NO DOTS ---------- */
-        #timeline { padding: 40px 20px; max-width: 800px; margin: 0 auto; }
-        .timeline-item {
-            margin: 30px 0;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity .5s ease, transform .5s ease;
-        }
-        .timeline-item.visible { opacity: 1; transform: translateX(0); }
-        .timeline-content {
-            background: rgba(0,0,0,0.8);
-            padding: 15px;
-            border-radius: 8px;
-            width: 60%;
-            margin: 0 auto;
-            text-align: center;
-            color: #fff;
-        }
-        .timeline-content p {
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            font-size: 1.2em;
-            margin: 0;
-        }
-        .timeline-content:hover { transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,.5); }
-        #timeline h2 { text-align: center; margin-bottom: 40px; }
-
         @media (max-width: 768px) {
             .sidebar img { width: 50px; margin-right: 8px; }
             .sidebar ul { gap: 8px; }
@@ -174,14 +183,9 @@
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const downloadLink = document.getElementById("download-link");
             const faqQuestions = document.querySelectorAll(".faq-item .faq-question");
             const sidebarLinks = document.querySelectorAll(".sidebar a");
             const timelineItems = document.querySelectorAll(".timeline-item");
-
-            downloadLink.addEventListener("click", function () {
-                this.href = "mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy.";
-            });
 
             function setActiveLink() {
                 const scrollPos = window.scrollY;
@@ -212,7 +216,6 @@
             const observer = new IntersectionObserver(e => e.forEach(en => en.isIntersecting && en.target.classList.add("visible")), { threshold: .1 });
             timelineItems.forEach(i => observer.observe(i));
 
-            /* ---------- FORM SUBMIT (FormSubmit.co) ---------- */
             const form = document.querySelector('#cta form');
             if (form) {
                 form.addEventListener('submit', function (e) {
@@ -220,7 +223,7 @@
                     const fd = new FormData(this);
                     fetch(this.action, { method: 'POST', body: fd })
                         .then(r => r.text())
-                        .then(html => {
+                        .then(() => {
                             document.getElementById('response').innerHTML = '<p style="color:#ffd700;">Thanks! You’re subscribed.</p>';
                         })
                         .catch(() => {
@@ -275,12 +278,11 @@
                 <p><strong>Sync:</strong> Align with government acquisition processes to ensure seamless transition of solutions.</p>
             </section>
 
-            <!-- CTA / BLUEPRINT + NEWSLETTER -->
+            <!-- CTA / NEWSLETTER -->
             <section id="cta" class="lead-capture">
                 <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
                 <p>Discover how to convert untapped capital into war-winning solutions.</p>
 
-                <!-- FormSubmit.co Form -->
                 <form action="https://formsubmit.co/patrick.highland.1@wildbluehorizons.org" method="POST"
                       style="margin:20px 0;text-align:center;">
                     <input type="email" name="email" placeholder="Enter your email" required
@@ -297,12 +299,6 @@
                 </form>
 
                 <div id="response" style="min-height:28px;font-size:1em;margin-top:10px;"></div>
-
-                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy."
-                   id="download-link"
-                   style="display:inline-block;margin-top:15px;padding:12px 30px;background:#ffd700;color:#000;text-decoration:none;border-radius:6px;font-weight:bold;font-size:1.1em;">
-                   Request the Blueprint
-                </a>
             </section>
 
             <!-- SUCCESS -->
@@ -313,7 +309,7 @@
                    class="cta-button">Take Action Now</a>
             </section>
 
-            <!-- TIMELINE (no line, no dots) -->
+            <!-- TIMELINE -->
             <section id="timeline">
                 <h2>Timeline</h2>
                 <div class="timeline-item"><div class="timeline-content"><p>Sep 25 – Alchemy approved as Blue Horizons project</p></div></div>
@@ -326,7 +322,16 @@
             <!-- ABOUT US -->
             <section id="guide">
                 <h2>The Alchemists</h2>
-                <p>We are <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/highland_bio.pdf" download>Lt Col Patrick "Dice" Highland, PhD</a>, <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/kenney_bio.pdf" download>Maj Eric "Slick" Kenney</a> from the Chief of Staff of the Air Force’s Blue Horizons fellowship program – a strategic innovation think-and-do tank charged with developing solutions to the Air Force’s most pressing challenges. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
+                <p>
+                    We are 
+                    <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/highland_bio.pdf" download>Lt Col Patrick "Dice" Highland, PhD</a> 
+                    (<a href="http://linkedin.com/in/patrick-highland" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>), 
+                    <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/anderson_bio.pdf" download>Maj Matt Anderson</a> 
+                    (<a href="https://www.linkedin.com/in/matthewanderson48" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>), and 
+                    <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/kenney_bio.pdf" download>Maj Eric "Slick" Kenney</a> 
+                    (<a href="https://www.linkedin.com/in/eric-kenney-79805378/" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>) 
+                    from the Chief of Staff of the Air Force’s Blue Horizons fellowship program – a strategic innovation think-and-do tank charged with developing solutions to the Air Force’s most pressing challenges. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.
+                </p>
             </section>
 
             <!-- FAQ -->
