@@ -124,7 +124,7 @@
         #problem h2, #guide h2, #cta h2, #success h2, #faq h2, #plan h2, #timeline h2 {
             font-size: 1.8em;
         }
-        #problem p, #guide p, #cta p, #success p, .cta-button, #cta a, #success a, #plan p, #timeline p, #faq .faq-question, #faq .faq-answer, #faq .faq-expand {
+        #problem p, #guide p, #cta p, #success p, .cta-button, #cta a, #success a, #plan p, #faq .faq-question, #faq .faq-answer, #faq .faq-expand {
             font-size: 1.2em;
         }
         a {
@@ -142,7 +142,7 @@
         .lead-capture a {
             margin-top: 10px;
         }
-        #faq h2, #faq .faq-question, #faq .faq-answer, #faq .faq-expand, #timeline h2, #timeline p {
+        #faq h2, #faq .faq-question, #faq .faq-answer, #faq .faq-expand, #timeline h2 {
             color: #000;
         }
         #faq .faq-answer {
@@ -168,6 +168,48 @@
             margin-top: 10px;
         }
 
+        /* Timeline Styling - NO LINE, NO DOTS */
+        #timeline {
+            padding: 40px 20px;
+            position: relative;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .timeline-item {
+            margin: 30px 0;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .timeline-content {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            width: 60%;
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+        }
+        .timeline-content p {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-size: 1.2em;
+            margin: 0;
+        }
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        #timeline h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 padding: 10px 0;
@@ -188,6 +230,10 @@
             }
             section, .lead-capture {
                 padding: 40px 0;
+            }
+            .timeline-content {
+                width: 80%;
+                padding: 12px;
             }
         }
 
@@ -220,8 +266,12 @@
             #timeline h2 {
                 font-size: 1.6em;
             }
-            #timeline p {
+            .timeline-content p {
                 font-size: 1em;
+            }
+            .timeline-content {
+                width: 90%;
+                padding: 10px;
             }
         }
     </style>
@@ -230,6 +280,7 @@
             const downloadLink = document.getElementById("download-link");
             const faqQuestions = document.querySelectorAll(".faq-item .faq-question");
             const sidebarLinks = document.querySelectorAll(".sidebar a");
+            const timelineItems = document.querySelectorAll(".timeline-item");
 
             downloadLink.addEventListener("click", function() {
                 this.href = "mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy.";
@@ -262,6 +313,37 @@
                     });
                 }
             });
+
+            // Timeline Animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            timelineItems.forEach(item => observer.observe(item));
+
+            // Newsletter Form Submission
+            const form = document.querySelector('#cta form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    fetch('subscribe.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(r => r.text())
+                    .then(html => {
+                        document.getElementById('response').innerHTML = html;
+                    })
+                    .catch(() => {
+                        document.getElementById('response').innerHTML = '<p style="color:red;">Error. Please try again.</p>';
+                    });
+                });
+            }
         });
     </script>
 </head>
@@ -297,13 +379,69 @@
                 <p><strong>Synthesize:</strong> Combine POM and available intelligence to articulate clear, unclassified technology demand signals to industry.</p>
                 <p><strong>Engage:</strong> Pull venture capital's billions and startup talent into the defense acquisition game.</p>
                 <p><strong>Sync:</strong> Align with government acquisition processes to ensure seamless transition of solutions.</p>
-                <p>Alchemy will design this process, create a common marketplace for all players to monitor requirements and progress, and run at least 5 test cases to measure success and refine each step.</p>
             </section>
 
             <section id="cta" class="lead-capture">
                 <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
                 <p>Discover how to convert untapped capital into war-winning solutions.</p>
-                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy." id="download-link">Request the Blueprint</a>
+                
+                <!-- Newsletter Subscribe Form -->
+                <form action="subscribe.php" method="post" style="margin: 20px 0; text-align: center;">
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        required 
+                        style="
+                            padding: 14px 18px;
+                            width: 300px;
+                            max-width: 85%;
+                            border: 2px solid #ffd700;
+                            background: #000;
+                            color: #fff;
+                            font-size: 1.1em;
+                            border-radius: 6px;
+                            margin-right: 10px;
+                            box-shadow: 0 0 8px rgba(255,215,0,0.3);
+                        ">
+                    <button 
+                        type="submit"
+                        style="
+                            padding: 14px 28px;
+                            background: #ffd700;
+                            color: #000;
+                            border: none;
+                            font-weight: bold;
+                            font-size: 1.1em;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        "
+                        onmouseover="this.style.background='#ffed4e'"
+                        onmouseout="this.style.background='#ffd700'">
+                        Subscribe to the Alchemy Newsletter
+                    </button>
+                </form>
+
+                <!-- Response Area -->
+                <div id="response" style="min-height: 28px; font-size: 1em; margin-top: 10px;"></div>
+
+                <!-- Request Blueprint Button -->
+                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy." 
+                   id="download-link" 
+                   style="
+                        display: inline-block;
+                        margin-top: 15px;
+                        padding: 12px 30px;
+                        background: #ffd700;
+                        color: #000;
+                        text-decoration: none;
+                        border-radius: 6px;
+                        font-weight: bold;
+                        font-size: 1.1em;
+                   ">
+                   Request the Blueprint
+                </a>
             </section>
 
             <section id="success">
@@ -314,12 +452,31 @@
 
             <section id="timeline">
                 <h2>Timeline</h2>
-                <p>Sep 25 – Alchemy approved as Blue Horizons project</p>
-                <p>Oct 25 – Conduct market research and partner with stakeholders</p>
-                <p>Nov 25 – Create marketplace and select test projects</p>
-                <p>Dec 25 – Startups begin work on prototypes</p>
-                <p>Feb 25 – Venture capital investment and senior leader engagements</p>
-                <p>May 26 – Brief Air Force Chief of Staff on prototype outcomes</p>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p>Sep 25 – Alchemy approved as Blue Horizons project</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p>Nov 25 – Create marketplace and select test projects</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p>Dec 25 – Startups begin work on prototypes</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p>Feb 25 – Venture capital investment and senior leader engagements</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p>May 26 – Brief Air Force Chief of Staff on prototype outcomes</p>
+                    </div>
+                </div>
             </section>
 
             <section id="guide">
