@@ -86,30 +86,15 @@
         #faq, #timeline {
             background-color: #000;
         }
-        .hero {
-            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/hero.JPG');
-        }
-        #problem {
-            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/problem.JPG');
-        }
-        #guide {
-            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/guide.JPG');
-        }
-        #cta {
-            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/cta.jpg');
-        }
-        #success {
-            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/success.JPG');
-        }
-        #faq {
-            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/faq.jpg');
-        }
-        #plan {
-            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/plan.jpg');
-        }
-        #timeline {
-            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/time.jpg');
-        }
+        .hero { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/hero.JPG'); }
+        #problem { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/problem.JPG'); }
+        #guide { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/guide.JPG'); }
+        #cta { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/cta.jpg'); }
+        #success { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/success.JPG'); }
+        #faq { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/faq.jpg'); }
+        #plan { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/plan.jpg'); }
+        #timeline { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/time.jpg'); }
+
         h2, p, a, .faq-question, .faq-answer, .faq-expand {
             position: relative;
             z-index: 5;
@@ -118,18 +103,11 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
             word-break: break-word;
         }
-        #problem h2, #problem p {
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
-        }
-        #problem h2, #guide h2, #cta h2, #success h2, #faq h2, #plan h2, #timeline h2 {
-            font-size: 1.8em;
-        }
-        #problem p, #guide p, #cta p, #success p, .cta-button, #cta a, #success a, #plan p, #faq .faq-question, #faq .faq-answer, #faq .faq-expand {
-            font-size: 1.2em;
-        }
-        a {
-            color: #ffd700;
-        }
+        #problem h2, #problem p { text-shadow: 3px 3px 6px rgba(0,0,0,0.8); }
+        #problem h2, #guide h2, #cta h2, #success h2, #faq h2, #plan h2, #timeline h2 { font-size: 1.8em; }
+        #problem p, #guide p, #cta p, #success p, .cta-button, #cta a, #success a, #plan p,
+        #faq .faq-question, #faq .faq-answer, #faq .faq-expand { font-size: 1.2em; }
+        a { color: #ffd700; }
         .cta-button, .lead-capture a {
             background-color: #ffd700;
             color: #000;
@@ -139,55 +117,26 @@
             display: inline-block;
             margin: 0 auto;
         }
-        .lead-capture a {
-            margin-top: 10px;
-        }
-        #faq h2, #faq .faq-question, #faq .faq-answer, #faq .faq-expand, #timeline h2 {
-            color: #000;
-        }
-        #faq .faq-answer {
-            display: none;
-        }
-        #faq .faq-answer.active {
-            display: block;
-        }
-        #faq .faq-expand {
-            margin-left: 10px;
-            cursor: pointer;
-        }
-        .faq-item {
-            margin-bottom: 20px;
-        }
-        footer {
-            padding: 20px 0;
-            color: #ffd700;
-            font-size: 0.9em;
-            text-align: center;
-        }
-        footer p.disclaimer {
-            margin-top: 10px;
-        }
+        .lead-capture a { margin-top: 10px; }
+        #faq h2, #faq .faq-question, #faq .faq-answer, #faq .faq-expand, #timeline h2 { color: #000; }
+        #faq .faq-answer { display: none; }
+        #faq .faq-answer.active { display: block; }
+        #faq .faq-expand { margin-left: 10px; cursor: pointer; }
+        .faq-item { margin-bottom: 20px; }
+        footer { padding: 20px 0; color: #ffd700; font-size: 0.9em; text-align: center; }
+        footer p.disclaimer { margin-top: 10px; }
 
-        /* Timeline Styling - NO LINE, NO DOTS */
-        #timeline {
-            padding: 40px 20px;
-            position: relative;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        /* ---------- TIMELINE – NO LINE, NO DOTS ---------- */
+        #timeline { padding: 40px 20px; max-width: 800px; margin: 0 auto; }
         .timeline-item {
             margin: 30px 0;
             opacity: 0;
             transform: translateX(-50px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity .5s ease, transform .5s ease;
         }
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
         .timeline-content {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0,0,0,0.8);
             padding: 15px;
             border-radius: 8px;
             width: 60%;
@@ -201,147 +150,82 @@
             font-size: 1.2em;
             margin: 0;
         }
-        .timeline-content:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-        #timeline h2 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+        .timeline-content:hover { transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,.5); }
+        #timeline h2 { text-align: center; margin-bottom: 40px; }
 
         @media (max-width: 768px) {
-            .sidebar {
-                padding: 10px 0;
-            }
-            .sidebar img {
-                width: 50px;
-                margin-right: 8px;
-            }
-            .sidebar ul {
-                gap: 8px;
-            }
-            .sidebar a {
-                font-size: 0.9em;
-                padding: 5px 8px;
-            }
-            .container {
-                margin-top: 60px;
-            }
-            section, .lead-capture {
-                padding: 40px 0;
-            }
-            .timeline-content {
-                width: 80%;
-                padding: 12px;
-            }
+            .sidebar img { width: 50px; margin-right: 8px; }
+            .sidebar ul { gap: 8px; }
+            .sidebar a { font-size: .9em; padding: 5px 8px; }
+            .container { margin-top: 60px; }
+            section, .lead-capture { padding: 40px 0; }
+            .timeline-content { width: 80%; padding: 12px; }
         }
-
         @media (max-width: 480px) {
-            .sidebar {
-                padding: 8px 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            .sidebar img {
-                width: 40px;
-                margin-right: 5px;
-                margin-bottom: 5px;
-            }
-            .sidebar ul {
-                gap: 5px;
-            }
-            .sidebar a {
-                font-size: 0.8em;
-                padding: 5px;
-            }
-            .container {
-                margin-top: 60px;
-            }
-            .hero, section, .lead-capture {
-                padding: 30px 0;
-            }
-            #timeline h2 {
-                font-size: 1.6em;
-            }
-            .timeline-content p {
-                font-size: 1em;
-            }
-            .timeline-content {
-                width: 90%;
-                padding: 10px;
-            }
+            .sidebar img { width: 40px; margin-right: 5px; margin-bottom: 5px; }
+            .sidebar ul { gap: 5px; }
+            .sidebar a { font-size: .8em; padding: 5px; }
+            .container { margin-top: 60px; }
+            .hero, section, .lead-capture { padding: 30px 0; }
+            #timeline h2 { font-size: 1.6em; }
+            .timeline-content p { font-size: 1em; }
+            .timeline-content { width: 90%; padding: 10px; }
         }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const downloadLink = document.getElementById("download-link");
             const faqQuestions = document.querySelectorAll(".faq-item .faq-question");
             const sidebarLinks = document.querySelectorAll(".sidebar a");
             const timelineItems = document.querySelectorAll(".timeline-item");
 
-            downloadLink.addEventListener("click", function() {
+            downloadLink.addEventListener("click", function () {
                 this.href = "mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy.";
             });
 
             function setActiveLink() {
-                const scrollPosition = window.scrollY;
-                sidebarLinks.forEach(link => {
-                    const section = document.getElementById(link.getAttribute("href").slice(1));
-                    if (section) {
-                        const top = section.offsetTop - 100;
-                        const bottom = top + section.offsetHeight;
-                        link.classList.toggle("active", scrollPosition >= top && scrollPosition < bottom);
+                const scrollPos = window.scrollY;
+                sidebarLinks.forEach(l => {
+                    const sec = document.getElementById(l.getAttribute("href").slice(1));
+                    if (sec) {
+                        const top = sec.offsetTop - 100;
+                        const bot = top + sec.offsetHeight;
+                        l.classList.toggle("active", scrollPos >= top && scrollPos < bot);
                     }
                 });
             }
-
             window.addEventListener("scroll", setActiveLink);
             setActiveLink();
 
-            faqQuestions.forEach(question => {
-                const expandButton = question.querySelector(".faq-expand");
-                const answer = question.nextElementSibling;
-                if (expandButton && answer) {
-                    question.addEventListener("click", () => {
-                        const isActive = answer.classList.contains("active");
-                        answer.classList.toggle("active");
-                        expandButton.textContent = isActive ? "+" : "−";
-                        answer.style.display = isActive ? "none" : "block";
+            faqQuestions.forEach(q => {
+                const btn = q.querySelector(".faq-expand");
+                const ans = q.nextElementSibling;
+                if (btn && ans) {
+                    q.addEventListener("click", () => {
+                        const active = ans.classList.toggle("active");
+                        btn.textContent = active ? "−" : "+";
+                        ans.style.display = active ? "block" : "none";
                     });
                 }
             });
 
-            // Timeline Animation
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                    }
-                });
-            }, { threshold: 0.1 });
+            const observer = new IntersectionObserver(e => e.forEach(en => en.isIntersecting && en.target.classList.add("visible")), { threshold: .1 });
+            timelineItems.forEach(i => observer.observe(i));
 
-            timelineItems.forEach(item => observer.observe(item));
-
-            // Newsletter Form Submission
+            /* ---------- FORM SUBMIT (FormSubmit.co) ---------- */
             const form = document.querySelector('#cta form');
             if (form) {
-                form.addEventListener('submit', function(e) {
+                form.addEventListener('submit', function (e) {
                     e.preventDefault();
-                    const formData = new FormData(this);
-                    fetch('subscribe.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(r => r.text())
-                    .then(html => {
-                        document.getElementById('response').innerHTML = html;
-                    })
-                    .catch(() => {
-                        document.getElementById('response').innerHTML = '<p style="color:red;">Error. Please try again.</p>';
-                    });
+                    const fd = new FormData(this);
+                    fetch(this.action, { method: 'POST', body: fd })
+                        .then(r => r.text())
+                        .then(html => {
+                            document.getElementById('response').innerHTML = '<p style="color:#ffd700;">Thanks! You’re subscribed.</p>';
+                        })
+                        .catch(() => {
+                            document.getElementById('response').innerHTML = '<p style="color:red;">Error – try again.</p>';
+                        });
                 });
             }
         });
@@ -360,20 +244,30 @@
             <li><a href="#faq">FAQ</a></li>
         </ul>
     </div>
+
     <div class="container">
         <div class="content">
+
+            <!-- HERO -->
             <section class="hero">
-                <h2 style="font-size: 3.5em; margin: 0; color: #fff; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); position: relative; z-index: 5;">Alchemy</h2>
-                <p style="font-size: 1.8em; color: #fff; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); position: relative; z-index: 5; word-break: break-word;">A process to harness venture capital and startup talent for defense</p>
-                <p style="font-size: 1.2em; color: #fff; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); position: relative; z-index: 5; word-break: break-word;">Tap into America's unmatched ingenuity and capital to deliver war-winning capabilities faster, smarter, and stronger.</p>
-                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Partner%20with%20Alchemy&body=I'm%20interested%20in%20partnering%20with%20Alchemy%20to%20support%20its%20mission.%20Please%20provide%20more%20details." class="cta-button">Partner with Us</a>
+                <h2 style="font-size:3.5em;margin:0;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;">Alchemy</h2>
+                <p style="font-size:1.8em;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;word-break:break-word;">
+                    A process to harness venture capital and startup talent for defense
+                </p>
+                <p style="font-size:1.2em;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;word-break:break-word;">
+                    Tap into America's unmatched ingenuity and capital to deliver war-winning capabilities faster, smarter, and stronger.
+                </p>
+                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Partner%20with%20Alchemy&body=I'm%20interested%20in%20partnering%20with%20Alchemy%20to%20support%20its%20mission.%20Please%20provide%20more%20details."
+                   class="cta-button">Partner with Us</a>
             </section>
 
+            <!-- PROBLEM -->
             <section id="problem">
                 <h2>The Problem: Fragmented Playbooks</h2>
                 <p>Despite abundant talent, the defense acquisition ecosystem is fragmented, with players using their own playbooks. This leaves venture capital and startup companies sidelined, confused about their role, like a bad version of "Who's on First?"</p>
             </section>
 
+            <!-- PLAN -->
             <section id="plan">
                 <h2>The Plan: A Three-Part Process</h2>
                 <p><strong>Synthesize:</strong> Combine POM and available intelligence to articulate clear, unclassified technology demand signals to industry.</p>
@@ -381,109 +275,61 @@
                 <p><strong>Sync:</strong> Align with government acquisition processes to ensure seamless transition of solutions.</p>
             </section>
 
+            <!-- CTA / BLUEPRINT + NEWSLETTER -->
             <section id="cta" class="lead-capture">
                 <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
                 <p>Discover how to convert untapped capital into war-winning solutions.</p>
-                
-                <!-- Newsletter Subscribe Form -->
-                <form action="subscribe.php" method="post" style="margin: 20px 0; text-align: center;">
-                    <input 
-                        type="email" 
-                        name="email" 
-                        placeholder="Enter your email" 
-                        required 
-                        style="
-                            padding: 14px 18px;
-                            width: 300px;
-                            max-width: 85%;
-                            border: 2px solid #ffd700;
-                            background: #000;
-                            color: #fff;
-                            font-size: 1.1em;
-                            border-radius: 6px;
-                            margin-right: 10px;
-                            box-shadow: 0 0 8px rgba(255,215,0,0.3);
-                        ">
-                    <button 
-                        type="submit"
-                        style="
-                            padding: 14px 28px;
-                            background: #ffd700;
-                            color: #000;
-                            border: none;
-                            font-weight: bold;
-                            font-size: 1.1em;
-                            border-radius: 6px;
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                        "
-                        onmouseover="this.style.background='#ffed4e'"
-                        onmouseout="this.style.background='#ffd700'">
+
+                <!-- FormSubmit.co Form -->
+                <form action="https://formsubmit.co/patrick.highland.1@wildbluehorizons.org" method="POST"
+                      style="margin:20px 0;text-align:center;">
+                    <input type="email" name="email" placeholder="Enter your email" required
+                           style="padding:14px 18px;width:300px;max-width:85%;border:2px solid #ffd700;background:#000;color:#fff;font-size:1.1em;border-radius:6px;margin-right:10px;box-shadow:0 0 8px rgba(255,215,0,.3);">
+                    <button type="submit"
+                            style="padding:14px 28px;background:#ffd700;color:#000;border:none;font-weight:bold;font-size:1.1em;border-radius:6px;cursor:pointer;transition:all .3s ease;"
+                            onmouseover="this.style.background='#ffed4e'"
+                            onmouseout="this.style.background='#ffd700'">
                         Subscribe to the Alchemy Newsletter
                     </button>
+                    <input type="hidden" name="_subject" value="New Alchemy Newsletter Subscription">
+                    <input type="hidden" name="_autoresponse" value="Thanks for subscribing to the Alchemy Newsletter!">
+                    <input type="hidden" name="_next" value="https://patrickhighland1-maker.github.io/Alchemy.github.io/thanks.html">
                 </form>
 
-                <!-- Response Area -->
-                <div id="response" style="min-height: 28px; font-size: 1em; margin-top: 10px;"></div>
+                <div id="response" style="min-height:28px;font-size:1em;margin-top:10px;"></div>
 
-                <!-- Request Blueprint Button -->
-                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy." 
-                   id="download-link" 
-                   style="
-                        display: inline-block;
-                        margin-top: 15px;
-                        padding: 12px 30px;
-                        background: #ffd700;
-                        color: #000;
-                        text-decoration: none;
-                        border-radius: 6px;
-                        font-weight: bold;
-                        font-size: 1.1em;
-                   ">
+                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy."
+                   id="download-link"
+                   style="display:inline-block;margin-top:15px;padding:12px 30px;background:#ffd700;color:#000;text-decoration:none;border-radius:6px;font-weight:bold;font-size:1.1em;">
                    Request the Blueprint
                 </a>
             </section>
 
+            <!-- SUCCESS -->
             <section id="success">
                 <h2>War-Winning Capabilities Delivered</h2>
                 <p>Alchemy turns your leadership into action, delivering the Department of War access to startup talent and venture capital dollars that contribute to better warfighting outcomes for the Combatant Commander.</p>
-                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Take%20Action%20with%20Alchemy&body=I'm%20ready%20to%20take%20action%20with%20Alchemy.%20Please%20provide%20next%20steps%20for%20collaboration." class="cta-button">Take Action Now</a>
+                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Take%20Action%20with%20Alchemy&body=I'm%20ready%20to%20take%20action%20with%20Alchemy.%20Please%20provide%20next%20steps%20for%20collaboration."
+                   class="cta-button">Take Action Now</a>
             </section>
 
+            <!-- TIMELINE (no line, no dots) -->
             <section id="timeline">
                 <h2>Timeline</h2>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <p>Sep 25 – Alchemy approved as Blue Horizons project</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <p>Nov 25 – Create marketplace and select test projects</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <p>Dec 25 – Startups begin work on prototypes</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <p>Feb 25 – Venture capital investment and senior leader engagements</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <p>May 26 – Brief Air Force Chief of Staff on prototype outcomes</p>
-                    </div>
-                </div>
+                <div class="timeline-item"><div class="timeline-content"><p>Sep 25 – Alchemy approved as Blue Horizons project</p></div></div>
+                <div class="timeline-item"><div class="timeline-content"><p>Nov 25 – Create marketplace and select test projects</p></div></div>
+                <div class="timeline-item"><div class="timeline-content"><p>Dec 25 – Startups begin work on prototypes</p></div></div>
+                <div class="timeline-item"><div class="timeline-content"><p>Feb 25 – Venture capital investment and senior leader engagements</p></div></div>
+                <div class="timeline-item"><div class="timeline-content"><p>May 26 – Brief Air Force Chief of Staff on prototype outcomes</p></div></div>
             </section>
 
+            <!-- ABOUT US -->
             <section id="guide">
                 <h2>The Alchemists</h2>
                 <p>We are <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/highland_bio.pdf" download>Lt Col Patrick "Dice" Highland, PhD</a>, <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/anderson_bio.pdf" download>Maj Matt Anderson</a>, and <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/kenney_bio.pdf" download>Maj Eric "Slick" Kenney</a> from the Chief of Staff of the Air Force’s Blue Horizons fellowship program – a strategic innovation think-and-do tank charged with developing solutions to the Air Force’s most pressing challenges. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.</p>
             </section>
 
+            <!-- FAQ -->
             <section id="faq">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-item">
@@ -508,10 +354,12 @@
                 </div>
             </section>
 
+            <!-- FOOTER -->
             <footer>
-                <p>&copy; 2025 Alchemy. Vision Venture Victory. <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Contact%20Alchemy&body=I'm%20reaching%20out%20to%20learn%20more%20about%20Alchemy.%20Please%20provide%20additional%20information.">Contact Us</a></p>
+                <p>© 2025 Alchemy. Vision Venture Victory. <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Contact%20Alchemy&body=I'm%20reaching%20out%20to%20learn%20more%20about%20Alchemy.%20Please%20provide%20additional%20information.">Contact Us</a></p>
                 <p class="disclaimer">The views and opinions expressed on this website are those of the authors and do not necessarily reflect the official policy or position of the United States Air Force, the Department of Defense, or the U.S. Government.</p>
             </footer>
+
         </div>
     </div>
 </body>
