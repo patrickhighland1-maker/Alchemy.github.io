@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alchemy – Defense × VC × Startups</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    :root {
+      --gold: #d4af37;
+      --dark: #1a1a1a;
+      --light: #f8f8f8;
+      --gray: #444;
+    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #000, #222);
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+    }
+    header img {
+      height: 80px;
+      filter: brightness(1.3);
+    }
+    .container { max-width: 1100px; margin: auto; padding: 2rem; }
+    .search-box {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      background: #111;
+      color: white;
+    }
+    button {
+      padding: 1rem 2rem;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #e6c44e; }
+    .role-selector {
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .role-btn {
+      padding: 0.6rem 1.2rem;
+      background: #333;
+      border: 1px solid var(--gold);
+      color: var(--light);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .role-btn.active {
+      background: var(--gold);
+      color: #000;
+    }
+    .section { margin: 2.5rem 0; }
+    .card {
+      background: #222;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #444;
+      margin-bottom: 1rem;
+    }
+    .score {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: var(--gold);
+    }
+    .progress-bar {
+      height: 12px;
+      background: #333;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    .fill {
+      height: 100%;
+      background: var(--gold);
+      transition: width 0.6s ease;
+    }
+    .hidden { display: none; }
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .modal-content {
+      background: #111;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 2px solid var(--gold);
+    }
+    .close {
+      float: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--gold);
+    }
+    textarea, select, input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      background: #222;
+      border: 1px solid #555;
+      color: white;
+      border-radius: 6px;
+    }
+    .milestone {
+      background: #2a2a2a;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 0.5rem 0;
+      position: relative;
+    }
+    .claim-btn {
+      background: #0b0;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .claimed { opacity: 0.6; }
+    .claimed::after {
+      content: "✓ Claimed";
+      color: #0b0;
+      font-weight: bold;
+      margin-left: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>ALCHEMY</h1>
+  <p>Turn defense needs into investable milestones</p>
+</header>
+
+<div class="container">
+
+  <!-- Role Selector -->
+  <div class="role-selector">
+    <button class="role-btn active" data-role="defense">Defense Acquisitions</button>
+    <button class="role-btn" data-role="vc">VC / Startup</button>
+    <button class="role-btn" data-role="alchemist">Alchemist (Admin)</button>
+  </div>
+
+  <!-- Search -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="e.g., hypersonic propulsion, quantum sensing, swarm drones..." />
+    <button id="searchBtn">Search</button>
+  </div>
+
+  <!-- Results -->
+  <div id="results" class="hidden">
+    <div class="section">
+      <h2>Alchemy Scores</h2>
+      <div class="card">
+        <h3>Market Strength</h3>
+        <div class="score" id="marketScore">—</div>
+        <div class="progress-bar"><div class="fill" id="marketFill" style="width:0%"></div></div>
+        <p id="marketDetails"></p>
+      </div>
+      <div class="card">
+        <h3>Defense Demand</h3>
+        <div class="score" id="demandScore">—</div>
+        <div class="progress-bar"><div class="fill" id="demandFill" style="width:0%"></div></div>
+        <p id="demandDetails"></p>
+      </div>
+      <div class="card">
+        <h3>Transition Likelihood</h3>
+        <div class="score" id="likelihoodScore">—</div>
+        <div class="progress-bar"><div class="fill" id="likelihoodFill" style="width:0%"></div></div>
+        <p>Higher = faster path from lab to field</p>
+      </div>
+    </div>
+
+    <!-- Defense Action -->
+    <div id="defenseAction" class="section hidden">
+      <button id="startProjectBtn" class="big">Start an Alchemy Project</button>
+    </div>
+
+    <!-- VC/Startup Action -->
+    <div id="vcAction" class="section hidden">
+      <button id="discoverBtn" class="big">Discover Alchemy Projects</button>
+    </div>
+  </div>
+
+  <!-- Alchemist Incentive Builder -->
+  <div id="alchemistPanel" class="section hidden">
+    <h2>Incentive Builder (Alchemist Only)</h2>
+    <button id="addIncentiveBtn">+ New Incentive</button>
+    <div id="incentivesList"></div>
+  </div>
+
+</div>
+
+<!-- Modals -->
+<div id="projectModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close">×</span>
+    <h2>Start Alchemy Project</h2>
+    <label>Problem (what do you need?)</label>
+    <textarea id="problemInput" rows="4" placeholder="e.g., Need a 30-minute loitering drone under $15k/unit..."></textarea>
+    <button id="generateBtn">Generate Milestones with AI</button>
+    <div id="generatedOutput"></div>
+    <button id="saveProjectBtn" class="hidden">Save Project</button>
+  </div>
+</div>
+
+<div id="discoverModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close">×</span>
+    <h2>Alchemy Projects</h2>
+    <input type="text" id="projectFilter" placeholder="Filter by keyword..." />
+    <div id="projectsList" style="margin-top:1rem;"></div>
+  </div>
+</div>
+
+<div id="incentiveModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close">×</span>
+    <h2>New Incentive</h2>
+    <input type="text" id="incName" placeholder="Name (e.g., $250k OTA)" />
+    <textarea id="incDesc" placeholder="Description..."></textarea>
+    <input type="text" id="incType" placeholder="Type (OTA, Prize, SBIR, etc)" />
+    <button id="saveIncentiveBtn">Save Incentive</button>
+  </div>
+</div>
+
+<script>
+  // === State ===
+  let currentRole = 'defense';
+  let projects = JSON.parse(localStorage.getItem('alchemy_projects') || '[]');
+  let incentives = JSON.parse(localStorage.getItem('alchemy_incentives') || '[]');
+  let currentSearch = '';
+
+  // Seed some incentives if none
+  if (incentives.length === 0) {
+    incentives = [
+      { id: '1', name: '$250k OTA', desc: 'Other Transaction Authority award', type: 'OTA' },
+      { id: '2', name: '$1M Prize', desc: 'Winner-takes-all challenge', type: 'Prize' },
+      { id: '3', name: 'SBIR Phase II', desc: 'Up to $1.5M non-dilutive', type: 'SBIR' }
+    ];
+    localStorage.setItem('alchemy_incentives', JSON.stringify(incentives));
+  }
+
+  // === DOM Elements ===
+  const els = {
+    roleBtns: document.querySelectorAll('.role-btn'),
+    searchInput: document.getElementById('searchInput'),
+    searchBtn: document.getElementById('searchBtn'),
+    results: document.getElementById('results'),
+    defenseAction: document.getElementById('defenseAction'),
+    vcAction: document.getElementById('vcAction'),
+    alchemistPanel: document.getElementById('alchemistPanel'),
+    startProjectBtn: document.getElementById('startProjectBtn'),
+    discoverBtn: document.getElementById('discoverBtn'),
+    addIncentiveBtn: document.getElementById('addIncentiveBtn'),
+    projectModal: document.getElementById('projectModal'),
+    discoverModal: document.getElementById('discoverModal'),
+    incentiveModal: document.getElementById('incentiveModal'),
+    incentivesList: document.getElementById('incentivesList'),
+    projectsList: document.getElementById('projectsList')
+  };
+
+  // === Role Switching ===
+  els.roleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      els.roleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentRole = btn.dataset.role;
+      updateUI();
+    });
+  });
+
+  function updateUI() {
+    const isDefense = currentRole === 'defense';
+    const isVC = currentRole === 'vc';
+    const isAlchemist = currentRole === 'alchemist';
+
+    els.defenseAction.classList.toggle('hidden', !isDefense || !currentSearch);
+    els.vcAction.classList.toggle('hidden', !isVC || !currentSearch);
+    els.alchemistPanel.classList.toggle('hidden', !isAlchemist);
+    renderIncentives();
+  }
+
+  // === Search ===
+  els.searchBtn.addEventListener('click', performSearch);
+  els.searchInput.addEventListener('keypress', e => e.key === 'Enter' && performSearch());
+
+  async function performSearch() {
+    const query = els.searchInput.value.trim();
+    if (!query) return alert('Enter a technology');
+    currentSearch = query;
+
+    // Mock API delay
+    document.body.style.cursor = 'wait';
+    await new Promise(r => setTimeout(r, 800));
+
+    // === Mock Data Engine ===
+    const mockData = generateMockScores(query);
+    displayScores(mockData);
+    els.results.classList.remove('hidden');
+    updateUI();
+    document.body.style.cursor = 'default';
+  }
+
+  function generateMockScores(query) {
+    const keywords = ['drone', 'hypersonic', 'quantum', 'ai', 'swarm', 'space', 'cyber', 'battery'];
+    const match = keywords.find(k => query.toLowerCase().includes(k)) || 'generic';
+
+    const market = {
+      drone: 82, hypersonic: 68, quantum: 55, ai: 94, swarm: 76, space: 88, cyber: 91, battery: 79, generic: 65
+    };
+    const demand = {
+      drone: 90, hypersonic: 95, quantum: 70, ai: 88, swarm: 85, space: 92, cyber: 80, battery: 87, generic: 60
+    };
+
+    const m = market[match];
+    const d = demand[match];
+    const likelihood = Math.round((m + d) / 2);
+
+    return {
+      market: m,
+      demand: d,
+      likelihood,
+      marketDetails: `${Math.floor(m/10)} companies, $2.1B invested (Series B+)`,
+      demandDetails: `$1.8B in FY26 budget, 14 open OTAs`
+    };
+  }
+
+  function displayScores(data) {
+    document.getElementById('marketScore').textContent = data.market;
+    document.getElementById('marketFill').style.width = data.market + '%';
+    document.getElementById('marketDetails').textContent = data.marketDetails;
+
+    document.getElementById('demandScore').textContent = data.demand;
+    document.getElementById('demandFill').style.width = data.demand + '%';
+    document.getElementById('demandDetails').textContent = data.demandDetails;
+
+    document.getElementById('likelihoodScore').textContent = data.likelihood;
+    document.getElementById('likelihoodFill').style.width = data.likelihood + '%';
+  }
+
+  // === Start Project ===
+  els.startProjectBtn.addEventListener('click', () => {
+    els.projectModal.classList.remove('hidden');
+  });
+
+  document.querySelector('#projectModal .close').addEventListener('click', () => {
+    els.projectModal.classList.add('hidden');
+  });
+
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    const problem = document.getElementById('problemInput').value.trim();
+    if (!problem) return alert('Describe the problem');
+
+    const milestones = generateMilestones(problem);
+    const output = document.getElementById('generatedOutput');
+    output.innerHTML = `<h3>Problem Statement</h3><p><strong>${problem}</strong></p><h3>Milestones</h3>`;
+    
+    milestones.forEach((m, i) => {
+      const div = document.createElement('div');
+      div.className = 'milestone';
+      div.innerHTML = `
+        <strong>M${i+1}:</strong> ${m.name}<br>
+        <em>${m.deliverable}</em><br>
+        <select class="incentive-select" data-mid="${i}">
+          <option value="">— Pick Incentive —</option>
+          ${incentives.map(inc => `<option value="${inc.id}">${inc.name}</option>`).join('')}
+        </select>
+      `;
+      output.appendChild(div);
+    });
+
+    document.getElementById('saveProjectBtn').classList.remove('hidden');
+  });
+
+  function generateMilestones(problem) {
+    // Mock AI — real version would call OpenAI
+    return [
+      { name: 'Concept Validation', deliverable: 'Whitepaper + simulation results' },
+      { name: 'Prototype Build', deliverable: 'Functional hardware/software demo' },
+      { name: 'Field Test', deliverable: 'Live demo in relevant environment' },
+      { name: 'Integration', deliverable: 'Integrated with existing platform' }
+    ];
+  }
+
+  document.getElementById('saveProjectBtn').addEventListener('click', () => {
+    const problem = document.getElementById('problemInput').value.trim();
+    const milestoneEls = document.querySelectorAll('.milestone');
+    const milestones = Array.from(milestoneEls).map(el => {
+      const select = el.querySelector('.incentive-select');
+      const incId = select.value;
+      const inc = incentives.find(i => i.id === incId) || null;
+      return {
+        name: el.querySelector('strong').nextSibling.textContent.trim(),
+        deliverable: el.querySelector('em').textContent,
+        incentive: inc
+      };
+    });
+
+    const project = {
+      id: Date.now().toString(),
+      tech: currentSearch,
+      problem,
+      milestones,
+      owner: 'You',
+      created: new Date().toLocaleDateString()
+    };
+
+    projects.push(project);
+    localStorage.setItem('alchemy_projects', JSON.stringify(projects));
+    alert('Project saved!');
+    els.projectModal.classList.add('hidden');
+  });
+
+  // === Discover Projects ===
+  els.discoverBtn.addEventListener('click', () => {
+    renderProjects();
+    els.discoverModal.classList.remove('hidden');
+  });
+
+  document.querySelector('#discoverModal .close').addEventListener('click', () => {
+    els.discoverModal.classList.add('hidden');
+  });
+
+  document.getElementById('projectFilter').addEventListener('input', renderProjects);
+
+  function renderProjects() {
+    const filter = document.getElementById('projectFilter').value.toLowerCase();
+    const filtered = projects.filter(p => 
+      p.tech.toLowerCase().includes(filter) || 
+      p.problem.toLowerCase().includes(filter)
+    );
+
+    const list = els.projectsList;
+    list.innerHTML = '';
+
+    if (filtered.length === 0) {
+      list.innerHTML = '<p>No projects match your search.</p>';
+      return;
+    }
+
+    filtered.forEach(proj => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `<h3>${proj.problem}</h3><small>Tech: ${proj.tech} | ${proj.created}</small>`;
+      
+      proj.milestones.forEach(m => {
+        const claimed = m.claimed ? 'claimed' : '';
+        const inc = m.incentive ? ` – ${m.incentive.name}` : '';
+        const mdiv = document.createElement('div');
+        mdiv.className = `milestone ${claimed}`;
+        mdiv.innerHTML = `
+          <strong>${m.name}</strong>: ${m.deliverable}${inc}
+          ${!m.claimed ? `<button class="claim-btn" data-pid="${proj.id}" data-mid="${m.name}">Claim</button>` : ''}
+        `;
+        card.appendChild(mdiv);
+      });
+      list.appendChild(card);
+    });
+
+    // Claim handlers
+    document.querySelectorAll('.claim-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pid = btn.dataset.pid;
+        const mid = btn.dataset.mid;
+        const proj = projects.find(p => p.id === pid);
+        const milestone = proj.milestones.find(m => m.name === mid);
+        milestone.claimed = { by: 'Acme Startup', date: new Date().toLocaleDateString() };
+        localStorage.setItem('alchemy_projects', JSON.stringify(projects));
+        renderProjects();
+      });
+    });
+  }
+
+  // === Alchemist Incentives ===
+  els.addIncentiveBtn.addEventListener('click', () => {
+    els.incentiveModal.classList.remove('hidden');
+  });
+
+  document.querySelector('#incentiveModal .close').addEventListener('click', () => {
+    els.incentiveModal.classList.add('hidden');
+  });
+
+  document.getElementById('saveIncentiveBtn').addEventListener('click', () => {
+    const name = document.getElementById('incName').value.trim();
+    const desc = document.getElementById('incDesc').value.trim();
+    const type = document.getElementById('incType').value.trim();
+    if (!name || !type) return alert('Name and type required');
+
+    incentives.push({
+      id: Date.now().toString(),
+      name, desc, type
+    });
+    localStorage.setItem('alchemy_incentives', JSON.stringify(incentives));
+    els.incentiveModal.classList.add('hidden');
+    renderIncentives();
+  });
+
+  function renderIncentives() {
+    const list = els.incentivesList;
+    list.innerHTML = '';
+    incentives.forEach(inc => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `<strong>${inc.name}</strong><br>${inc.desc}<br><em>Type: ${inc.type}</em>`;
+      list.appendChild(div);
+    });
+  }
+
+  // Init
+  updateUI();
+  renderIncentives();
+</script>
+
+</body>
+</html>
