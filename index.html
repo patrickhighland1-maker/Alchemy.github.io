@@ -141,7 +141,7 @@
         .timeline-content:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(255,215,0,0.3); }
         #timeline h2 { text-align: center; margin-bottom: 40px; color: #fff; }
 
-        /* PLAN SECTION – ALWAYS 3 COLUMNS */
+        /* PLAN SECTION – ALWAYS 3 COLUMNS, FULL TEXT */
         .plan-section {
             max-width: 1000px;
             margin: 0 auto;
@@ -185,17 +185,19 @@
         .plan-step-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.4s ease-in-out;
             margin-top: 10px;
         }
         .plan-step-content.expanded {
-            max-height: 200px;
+            max-height: 500px;
+            overflow: visible;
         }
         .plan-step-content p {
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
             font-size: 1.1em;
             margin: 0;
+            line-height: 1.6;
         }
 
         h2, p, a, .faq-question, .faq-answer, .faq-expand {
@@ -361,10 +363,10 @@
             <section class="hero">
                 <h2 style="font-size:3.5em;margin:0;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;">Alchemy</h2>
                 <p style="font-size:1.8em;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;word-break:break-word;">
-                    A process to harness venture capital and startup talent for defense
+                    Close the gap between commercial innovation and government acquisition
                 </p>
                 <p style="font-size:1.2em;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;word-break:break-word;">
-                    Tap into America's unmatched ingenuity and capital to deliver war-winning capabilities faster, smarter, and stronger.
+                    Turn innovation potential into operational capability by aligning government, investors, and startups.
                 </p>
                 <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Partner%20with%20Alchemy&body=I'm%20interested%20in%20partnering%20with%20Alchemy%20to%20support%20its%20mission.%20Please%20provide%20more%20details."
                    class="cta-button">Partner with Us</a>
@@ -373,38 +375,44 @@
             <!-- PROBLEM -->
             <section id="problem">
                 <h2>The Problem: Fragmented Playbooks</h2>
-                <p>Despite abundant talent, the defense acquisition ecosystem is fragmented, with players using their own playbooks. This leaves venture capital and startup companies sidelined, confused about their role, like a bad version of "Who's on First?"</p>
+                <p>Department of War Program Offices, venture capital investors, and startups operate in isolation despite a shared desire to deliver warfighting capability faster than adversaries. This creates a systemic innovation-to-capability gap.</p>
             </section>
 
-            <!-- PLAN – ALWAYS 3 COLUMNS -->
+            <!-- PLAN – VISION ABOVE BOXES -->
             <section id="plan">
                 <h2>The Plan: A Three-Part Process</h2>
+                
+                <!-- VISION STATEMENT ABOVE EXPANSION BOXES -->
+                <div style="max-width: 900px; margin: 0 auto 30px; padding: 20px; background: rgba(255,215,0,0.1); border: 1px solid #ffd700; border-radius: 8px; font-size: 1.1em; line-height: 1.7; color: #fff;">
+                    Alchemy envisions a system where the Department of War can see and shape emerging technology trends, where investors can identify the technologies most likely to transition, and where startups can find clear pathways to contribute to the mission. The long-term vision is a connected, data-driven marketplace where insight informs investment, investment drives innovation, and innovation reliably transitions into capability.
+                </div>
+
                 <div class="plan-section">
                     <div class="plan-step" tabindex="0">
                         <div class="plan-step-header">
-                            <span>Illuminate</span>
+                            <span>Insight</span>
                             <span class="plan-step-icon">▼</span>
                         </div>
                         <div class="plan-step-content">
-                            <p>Combine POM and available intelligence to articulate clear, unclassified technology demand signals to industry.</p>
+                            <p>Create a data-driven common operating picture of technology areas that matter to both government and industry. Provide decision-makers with clear visibility into where defense demand meets commercial opportunity.</p>
                         </div>
                     </div>
                     <div class="plan-step" tabindex="0">
                         <div class="plan-step-header">
-                            <span>Invest</span>
+                            <span>Investment</span>
                             <span class="plan-step-icon">▼</span>
                         </div>
                         <div class="plan-step-content">
-                            <p>Pull venture capital's billions and startup talent into the defense acquisition game.</p>
+                            <p>Incentivize performance by combining government demand signals and venture capital to accelerate promising technologies. Develop milestone-based models that reward measurable progress and signal private investment confidence.</p>
                         </div>
                     </div>
                     <div class="plan-step" tabindex="0">
                         <div class="plan-step-header">
-                            <span>Integrate</span>
+                            <span>Integration</span>
                             <span class="plan-step-icon">▼</span>
                         </div>
                         <div class="plan-step-content">
-                            <p>Align with government acquisition processes to ensure seamless transition of solutions.</p>
+                            <p>Engage acquisition pathways from the start to ensure that successful prototypes can scale to programs of record. Reduce perceived risk by quantifying market strength and technology maturity.</p>
                         </div>
                     </div>
                 </div>
@@ -436,9 +444,12 @@
             <!-- SUCCESS -->
             <section id="success">
                 <h2>War-Winning Capabilities Delivered</h2>
-                <p>Alchemy turns your leadership into action, delivering the Department of War access to startup talent and venture capital dollars that contribute to better warfighting outcomes for the Combatant Commander.</p>
+                <p style="font-size: 1.2em; line-height: 1.8; max-width: 900px; margin: 0 auto;">
+                    By connecting data, incentives, and communities across the public and private sectors, Alchemy seeks to turn fragmented innovation into a repeatable national advantage. The end goal is not one successful project—it’s a system that makes success routine.
+                </p>
+
                 <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Take%20Action%20with%20Alchemy&body=I'm%20ready%20to%20take%20action%20with%20Alchemy.%20Please%20provide%20next%20steps%20for%20collaboration."
-                   class="cta-button">Take Action Now</a>
+                   class="cta-button" style="margin-top: 40px;">Take Action Now</a>
             </section>
 
             <!-- TIMELINE – HORIZONTAL -->
@@ -448,22 +459,25 @@
                     <div class="timeline-item"><div class="timeline-content"><p>Sep 25 – Alchemy approved as Blue Horizons project</p></div></div>
                     <div class="timeline-item"><div class="timeline-content"><p>Nov 25 – Create marketplace and select test projects</p></div></div>
                     <div class="timeline-item"><div class="timeline-content"><p>Dec 25 – Startups begin work on prototypes</p></div></div>
-                    <div class="timeline-item"><div class="timeline-content"><p>Feb 25 – Venture capital investment and senior leader engagements</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>Feb 26 – Venture capital investment and senior leader engagements</p></div></div>
                     <div class="timeline-item"><div class="timeline-content"><p>May 26 – Brief Air Force Chief of Staff on prototype outcomes</p></div></div>
                 </div>
             </section>
 
-            <!-- ABOUT US -->
+            <!-- ABOUT US – BLINQ FOR ALL THREE -->
             <section id="guide">
                 <h2>The Alchemists</h2>
                 <p>
                     We are 
                     <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/highland_bio.pdf" download>Lt Col Patrick "Dice" Highland, PhD</a> 
-                    (<a href="http://linkedin.com/in/patrick-highland" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>), 
+                    (<a href="http://linkedin.com/in/patrick-highland" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>) 
+                    (<a href="https://blinq.me/vU4KNfnHnkeWXxM9cu3j" target="_blank" style="color:#ffd700; text-decoration:none;">Blinq</a>), 
                     <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/anderson_bio.pdf" download>Maj Matt Anderson</a> 
-                    (<a href="https://www.linkedin.com/in/matthewanderson48" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>), and 
+                    (<a href="https://www.linkedin.com/in/matthewanderson48" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>) 
+                    (<a href="https://blinq.me/XDrMeQQHCp4ig0p2Ggua" target="_blank" style="color:#ffd700; text-decoration:none;">Blinq</a>), and 
                     <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/kenney_bio.pdf" download>Maj Eric "Slick" Kenney</a> 
                     (<a href="https://www.linkedin.com/in/eric-kenney-79805378/" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>) 
+                    (<a href="https://blinq.me/J8pQvdubyQeo" target="_blank" style="color:#ffd700; text-decoration:none;">Blinq</a>) 
                     from the Chief of Staff of the Air Force’s Blue Horizons fellowship program – a strategic innovation think-and-do tank charged with developing solutions to the Air Force’s most pressing challenges. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.
                 </p>
             </section>
