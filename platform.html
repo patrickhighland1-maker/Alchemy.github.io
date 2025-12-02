@@ -1,0 +1,415 @@
+alchemy-mvp (7).html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alchemy Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-slate-900 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold cursor-pointer" id="logoBtn">Alchemy Dashboard</h1>
+                <p class="text-sm text-slate-300">Department of War - Acquisitions Intelligence</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <select id="userRole" class="bg-slate-800 text-white text-sm rounded px-3 py-1 border border-slate-600">
+                    <option value="acquisitions">Acquisitions Professional</option>
+                    <option value="company">Startup / Company</option>
+                    <option value="vc">Venture Capital</option>
+                </select>
+                <div class="text-right">
+                    <p class="text-sm font-medium" id="userName">John Mitchell</p>
+                    <p class="text-xs text-slate-400" id="userRoleDisplay">Acquisitions Professional</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-8 max-w-5xl">
+        <!-- SEARCH VIEW -->
+        <div id="searchView">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold text-gray-900 mb-3">Discover Technology Opportunities</h2>
+                <p class="text-lg text-gray-600">Enter a technology area to analyze market readiness and government demand</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Technology Area</label>
+                <input type="text" id="techSearch" placeholder="e.g., Quantum Computing, Hypersonic Propulsion..." class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4"/>
+                <button id="analyzeBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg">Analyze Technology Area</button>
+                <div class="mt-6 pt-6 border-t">
+                    <p class="text-sm font-medium text-gray-700 mb-3">Popular Searches:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="pill px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm">Quantum Computing</button>
+                        <button class="pill px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm">Hypersonic Missiles</button>
+                        <button class="pill px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm">Autonomous Drones</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold">Ongoing Acquisition Projects</h3>
+                    <span id="projectCount" class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">0 Active</span>
+                </div>
+                <div id="projectsList"><p class="text-center text-gray-500 py-8">No active projects. Create one to get started.</p></div>
+            </div>
+        </div>
+
+        <!-- LOADING VIEW -->
+        <div id="loadingView" class="hidden text-center">
+            <div class="bg-white rounded-xl shadow-lg p-12">
+                <div class="animate-spin w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+                <h3 class="text-xl font-semibold mb-2">Analyzing <span id="loadingTech" class="text-blue-600"></span></h3>
+                <p id="loadingStatus" class="text-gray-600">Searching intelligence sources...</p>
+            </div>
+        </div>
+
+        <!-- RESULTS VIEW -->
+        <div id="resultsView" class="hidden">
+            <button id="backBtn" class="mb-6 text-blue-600 font-medium">← Back to Dashboard</button>
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 id="resultTechName" class="text-3xl font-bold mb-6"></h2>
+                <div class="bg-blue-50 rounded-xl p-8 mb-8 text-center border-2 border-blue-200">
+                    <p class="text-sm font-semibold text-blue-900 uppercase mb-2">Transition Likelihood</p>
+                    <div class="text-6xl font-bold text-blue-600" id="transitionScore">--</div>
+                    <p class="text-gray-600">out of 100</p>
+                    <p id="transitionLabel" class="mt-2 font-medium"></p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="flex justify-between mb-2"><h3 class="font-semibold">Market Strength</h3><span id="marketScore" class="text-2xl font-bold text-green-600">--</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-4"><div id="marketBar" class="bg-green-500 h-3 rounded-full" style="width:0%;transition:width 1s"></div></div>
+                        <div id="marketDetails" class="text-sm space-y-1"></div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="flex justify-between mb-2"><h3 class="font-semibold">Government Demand</h3><span id="govScore" class="text-2xl font-bold text-blue-600">--</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-4"><div id="govBar" class="bg-blue-500 h-3 rounded-full" style="width:0%;transition:width 1s"></div></div>
+                        <div id="govDetails" class="text-sm space-y-1"></div>
+                    </div>
+                </div>
+                <div id="startProjectWrap" class="text-center">
+                    <button id="startProjectBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg">Start Acquisition Project →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECT BUILDER -->
+        <div id="projectView" class="hidden">
+            <button id="backToResultsBtn" class="mb-6 text-blue-600 font-medium">← Back to Analysis</button>
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold mb-6">Create Acquisition Project</h2>
+                <div class="mb-6">
+                    <label class="block font-semibold mb-2">Problem Statement</label>
+                    <textarea id="problemInput" rows="4" class="w-full px-4 py-3 border rounded-lg"></textarea>
+                </div>
+                <div class="mb-6">
+                    <label class="block font-semibold mb-2">Milestones</label>
+                    <div id="milestonesDiv" class="space-y-2"></div>
+                    <button id="addMilestoneBtn" class="mt-2 text-blue-600 text-sm">+ Add Milestone</button>
+                </div>
+                <div class="mb-6">
+                    <label class="block font-semibold mb-2">Budget</label>
+                    <input type="text" id="budgetInput" value="$5,000,000" class="px-4 py-3 border rounded-lg text-xl font-semibold"/>
+                </div>
+                <button id="publishBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-lg">Publish Project</button>
+            </div>
+        </div>
+
+        <!-- SUCCESS VIEW -->
+        <div id="successView" class="hidden text-center">
+            <div class="bg-white rounded-xl shadow-lg p-12">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-green-600 text-4xl">✓</span>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">Project Published!</h2>
+                <p class="text-gray-600 mb-8">Your project is now live on the dashboard.</p>
+                <button id="backToDashBtn" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg">Back to Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLAIM MODAL -->
+    <div id="claimModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold mb-4">Claim Milestone</h3>
+            <p id="claimTitle" class="text-gray-600 mb-4"></p>
+            <input type="text" id="claimCompany" placeholder="Company Name" class="w-full px-4 py-2 border rounded-lg mb-3"/>
+            <input type="email" id="claimEmail" placeholder="Contact Email" class="w-full px-4 py-2 border rounded-lg mb-3"/>
+            <textarea id="claimProof" placeholder="Proof of completion..." rows="3" class="w-full px-4 py-2 border rounded-lg mb-4"></textarea>
+            <div class="flex gap-3">
+                <button id="submitClaimBtn" class="flex-1 bg-green-600 text-white py-2 rounded-lg">Submit</button>
+                <button id="cancelClaimBtn" class="px-4 py-2 border rounded-lg">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============ STATE ============
+        let currentTech = '';
+        let currentData = null;
+        let projects = [];
+        let claimProjIdx = null;
+        let claimMileIdx = null;
+
+        // ============ DOM ELEMENTS ============
+        const searchView = document.getElementById('searchView');
+        const loadingView = document.getElementById('loadingView');
+        const resultsView = document.getElementById('resultsView');
+        const projectView = document.getElementById('projectView');
+        const successView = document.getElementById('successView');
+        const claimModal = document.getElementById('claimModal');
+
+        // ============ VIEW MANAGEMENT ============
+        function showView(name) {
+            searchView.classList.add('hidden');
+            loadingView.classList.add('hidden');
+            resultsView.classList.add('hidden');
+            projectView.classList.add('hidden');
+            successView.classList.add('hidden');
+            
+            if (name === 'search') searchView.classList.remove('hidden');
+            if (name === 'loading') loadingView.classList.remove('hidden');
+            if (name === 'results') resultsView.classList.remove('hidden');
+            if (name === 'project') projectView.classList.remove('hidden');
+            if (name === 'success') successView.classList.remove('hidden');
+            
+            if (name === 'search') renderProjects();
+        }
+
+        // ============ ANALYZE ============
+        function doAnalyze() {
+            const tech = document.getElementById('techSearch').value.trim();
+            if (!tech) {
+                alert('Please enter a technology area');
+                return;
+            }
+            
+            currentTech = tech;
+            document.getElementById('loadingTech').textContent = tech;
+            showView('loading');
+
+            // Simulate loading
+            let step = 0;
+            const steps = ['Searching market data...', 'Analyzing VC activity...', 'Querying contracts...', 'Calculating scores...'];
+            const interval = setInterval(function() {
+                if (step < steps.length) {
+                    document.getElementById('loadingStatus').textContent = steps[step];
+                    step++;
+                }
+            }, 700);
+
+            // Generate results after delay
+            setTimeout(function() {
+                clearInterval(interval);
+                currentData = makeFallbackData(tech);
+                displayResults();
+            }, 3000);
+        }
+
+        function makeFallbackData(tech) {
+            const ms = 55 + Math.floor(Math.random() * 30);
+            const gs = 55 + Math.floor(Math.random() * 30);
+            const ts = Math.floor((ms + gs) / 2);
+            return {
+                marketScore: ms,
+                govScore: gs,
+                transitionScore: ts,
+                marketDetails: {
+                    companies: (50 + Math.floor(Math.random() * 100)) + ' companies',
+                    vcFunding: '$' + (1 + Math.random() * 4).toFixed(1) + 'B',
+                    products: 'Multiple commercial solutions',
+                    recentActivity: (10 + Math.floor(Math.random() * 20)) + ' new entrants'
+                },
+                govDetails: {
+                    contracts: '$' + (0.5 + Math.random() * 2).toFixed(1) + 'B active',
+                    budget: '$' + (300 + Math.floor(Math.random() * 700)) + 'M FY2025',
+                    congressional: (5 + Math.floor(Math.random() * 15)) + ' mentions',
+                    priority: 'Critical Technology Area'
+                },
+                problemStatement: 'The Department of War requires advanced ' + tech + ' capabilities for multi-domain operations. Current systems lack required performance. Innovative solutions needed for rapid development.',
+                milestones: [
+                    'Phase 1: Proof of concept demonstration',
+                    'Phase 2: Prototype development',
+                    'Phase 3: Field validation testing',
+                    'Phase 4: Full operational deployment'
+                ]
+            };
+        }
+
+        function displayResults() {
+            document.getElementById('resultTechName').textContent = currentTech;
+            document.getElementById('transitionScore').textContent = currentData.transitionScore;
+            document.getElementById('transitionLabel').textContent = currentData.transitionScore >= 70 ? '🟢 Good Potential' : '🟠 Moderate Potential';
+            document.getElementById('marketScore').textContent = currentData.marketScore;
+            document.getElementById('govScore').textContent = currentData.govScore;
+            
+            setTimeout(function() {
+                document.getElementById('marketBar').style.width = currentData.marketScore + '%';
+                document.getElementById('govBar').style.width = currentData.govScore + '%';
+            }, 100);
+
+            const md = currentData.marketDetails;
+            const gd = currentData.govDetails;
+            document.getElementById('marketDetails').innerHTML = '<p><b>Companies:</b> ' + md.companies + '</p><p><b>VC Funding:</b> ' + md.vcFunding + '</p><p><b>Products:</b> ' + md.products + '</p>';
+            document.getElementById('govDetails').innerHTML = '<p><b>Contracts:</b> ' + gd.contracts + '</p><p><b>Budget:</b> ' + gd.budget + '</p><p><b>Congressional:</b> ' + gd.congressional + '</p>';
+
+            document.getElementById('startProjectWrap').style.display = document.getElementById('userRole').value === 'acquisitions' ? 'block' : 'none';
+            
+            showView('results');
+        }
+
+        // ============ PROJECT BUILDER ============
+        function openProjectBuilder() {
+            document.getElementById('problemInput').value = currentData.problemStatement;
+            
+            const div = document.getElementById('milestonesDiv');
+            div.innerHTML = '';
+            currentData.milestones.forEach(function(m, i) {
+                div.innerHTML += '<div class="flex gap-2"><input type="text" value="' + m + '" class="flex-1 px-3 py-2 border rounded msInput"/><select class="border rounded px-2 msInc"><option>$250K Prize</option><option>$500K Prize</option><option>Facility Access</option></select></div>';
+            });
+            
+            showView('project');
+        }
+
+        function addMilestone() {
+            const div = document.getElementById('milestonesDiv');
+            div.innerHTML += '<div class="flex gap-2"><input type="text" placeholder="New milestone..." class="flex-1 px-3 py-2 border rounded msInput"/><select class="border rounded px-2 msInc"><option>$250K Prize</option><option>$500K Prize</option><option>Facility Access</option></select></div>';
+        }
+
+        function publishProject() {
+            const milestones = [];
+            document.querySelectorAll('.msInput').forEach(function(input, i) {
+                const selects = document.querySelectorAll('.msInc');
+                milestones.push({
+                    title: input.value,
+                    incentive: selects[i].value,
+                    claimed: false,
+                    claimedBy: null
+                });
+            });
+
+            projects.unshift({
+                id: Math.floor(100000 + Math.random() * 900000),
+                techName: currentTech,
+                problemStatement: document.getElementById('problemInput').value,
+                milestones: milestones,
+                budget: document.getElementById('budgetInput').value,
+                transitionScore: currentData.transitionScore,
+                date: new Date().toLocaleDateString()
+            });
+
+            showView('success');
+        }
+
+        // ============ PROJECTS LIST ============
+        function renderProjects() {
+            const role = document.getElementById('userRole').value;
+            document.getElementById('projectCount').textContent = projects.length + ' Active';
+
+            if (projects.length === 0) {
+                document.getElementById('projectsList').innerHTML = '<p class="text-center text-gray-500 py-8">No active projects. Create one to get started.</p>';
+                return;
+            }
+
+            let html = '';
+            projects.forEach(function(p, pi) {
+                html += '<div class="border rounded-xl p-6 mb-4">';
+                html += '<div class="flex justify-between mb-4"><div><h4 class="text-xl font-bold">' + p.techName + '</h4><p class="text-sm text-gray-500">#ALK-' + p.id + '</p></div><span class="text-blue-600 font-semibold">' + p.budget + '</span></div>';
+                html += '<p class="text-sm text-gray-700 mb-4 bg-gray-50 p-3 rounded">' + p.problemStatement.substring(0, 150) + '...</p>';
+                html += '<div class="space-y-2">';
+                
+                p.milestones.forEach(function(m, mi) {
+                    html += '<div class="border rounded p-3 ' + (m.claimed ? 'bg-green-50 border-green-300' : '') + '">';
+                    html += '<div class="flex justify-between items-center">';
+                    html += '<div><span class="' + (m.claimed ? 'text-green-600' : 'text-gray-400') + '">' + (m.claimed ? '✓' : '○') + '</span> <span class="font-medium">' + m.title + '</span> <span class="text-xs text-gray-500">(' + m.incentive + ')</span></div>';
+                    
+                    if (!m.claimed && role === 'company') {
+                        html += '<button onclick="openClaim(' + pi + ',' + mi + ')" class="px-3 py-1 bg-green-600 text-white text-sm rounded">Claim</button>';
+                    } else if (!m.claimed) {
+                        html += '<span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Open</span>';
+                    }
+                    
+                    html += '</div>';
+                    
+                    if (m.claimed && m.claimedBy) {
+                        html += '<div class="mt-2 ml-6 p-2 bg-white border border-green-200 rounded text-sm"><p class="font-medium text-green-700">' + m.claimedBy.company + '</p><p class="text-gray-600">' + m.claimedBy.email + '</p></div>';
+                    }
+                    
+                    html += '</div>';
+                });
+                
+                html += '</div></div>';
+            });
+
+            document.getElementById('projectsList').innerHTML = html;
+        }
+
+        // ============ CLAIM MODAL ============
+        function openClaim(pi, mi) {
+            claimProjIdx = pi;
+            claimMileIdx = mi;
+            document.getElementById('claimTitle').textContent = projects[pi].milestones[mi].title;
+            document.getElementById('claimCompany').value = '';
+            document.getElementById('claimEmail').value = '';
+            document.getElementById('claimProof').value = '';
+            claimModal.classList.remove('hidden');
+        }
+
+        function submitClaim() {
+            const company = document.getElementById('claimCompany').value.trim();
+            const email = document.getElementById('claimEmail').value.trim();
+            const proof = document.getElementById('claimProof').value.trim();
+            
+            if (!company || !email || !proof) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            projects[claimProjIdx].milestones[claimMileIdx].claimed = true;
+            projects[claimProjIdx].milestones[claimMileIdx].claimedBy = {
+                company: company,
+                email: email,
+                proof: proof
+            };
+
+            claimModal.classList.add('hidden');
+            renderProjects();
+        }
+
+        // ============ EVENT LISTENERS ============
+        document.getElementById('analyzeBtn').addEventListener('click', doAnalyze);
+        document.getElementById('techSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') doAnalyze();
+        });
+        document.getElementById('logoBtn').addEventListener('click', function() { showView('search'); });
+        document.getElementById('backBtn').addEventListener('click', function() { showView('search'); });
+        document.getElementById('startProjectBtn').addEventListener('click', openProjectBuilder);
+        document.getElementById('backToResultsBtn').addEventListener('click', function() { showView('results'); });
+        document.getElementById('addMilestoneBtn').addEventListener('click', addMilestone);
+        document.getElementById('publishBtn').addEventListener('click', publishProject);
+        document.getElementById('backToDashBtn').addEventListener('click', function() { showView('search'); });
+        document.getElementById('submitClaimBtn').addEventListener('click', submitClaim);
+        document.getElementById('cancelClaimBtn').addEventListener('click', function() { claimModal.classList.add('hidden'); });
+
+        document.querySelectorAll('.pill').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.getElementById('techSearch').value = btn.textContent;
+                doAnalyze();
+            });
+        });
+
+        document.getElementById('userRole').addEventListener('change', function() {
+            const names = { acquisitions: 'John Mitchell', company: 'Sarah Chen', vc: 'Michael Torres' };
+            const roles = { acquisitions: 'Acquisitions Professional', company: 'CEO, TechStartup Inc.', vc: 'Partner, Defense Ventures' };
+            document.getElementById('userName').textContent = names[this.value];
+            document.getElementById('userRoleDisplay').textContent = roles[this.value];
+            renderProjects();
+        });
+
+        // ============ INIT ============
+        showView('search');
+    </script>
+</body>
+</html>
