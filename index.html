@@ -175,7 +175,7 @@
             color: #fff;
         }
         .plan-step-icon {
-            font-size: 1.2em;
+            font-size: 1.4em;
             transition: transform 0.3s ease;
             color: #ffd700;
         }
@@ -213,20 +213,22 @@
         #problem p, #guide p, #cta p, #success p, .cta-button, #cta a, #success a, #plan p,
         #faq .faq-question, #faq .faq-answer, #faq .faq-expand { font-size: 1.2em; }
         a { color: #ffd700; }
-        .cta-button, .lead-capture a {
+        .cta-button {
             background-color: #ffd700;
             color: #000;
-            padding: 15px 30px;
+            padding: 16px 32px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 6px;
             display: inline-block;
-            margin: 0 auto;
+            margin: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: all .3s ease;
         }
-        .lead-capture a { margin-top: 10px; }
+        .cta-button:hover { background: #ffed4e; }
         #faq h2, #faq .faq-question, #faq .faq-answer, #faq .faq-expand, #timeline h2 { color: #000; }
         #faq .faq-answer { display: none; }
         #faq .faq-answer.active { display: block; }
-        #faq .faq-expand { margin-left: 10px; cursor: pointer; }
         .faq-item { margin-bottom: 20px; }
         footer { padding: 20px 0; color: #ffd700; font-size: 0.9em; text-align: center; }
         footer p.disclaimer { margin-top: 10px; }
@@ -263,13 +265,12 @@
             const timelineItems = document.querySelectorAll(".timeline-item");
             const planSteps = document.querySelectorAll(".plan-step");
 
-            // Sidebar active link
             function setActiveLink() {
-                const scrollPos = window.scrollY;
+                const scrollPos = window.scrollY + 100;
                 sidebarLinks.forEach(l => {
                     const sec = document.getElementById(l.getAttribute("href").slice(1));
                     if (sec) {
-                        const top = sec.offsetTop - 100;
+                        const top = sec.offsetTop - 150;
                         const bot = top + sec.offsetHeight;
                         l.classList.toggle("active", scrollPos >= top && scrollPos < bot);
                     }
@@ -278,24 +279,21 @@
             window.addEventListener("scroll", setActiveLink);
             setActiveLink();
 
-            // FAQ toggle
             faqQuestions.forEach(q => {
                 const btn = q.querySelector(".faq-expand");
                 const ans = q.nextElementSibling;
                 if (btn && ans) {
                     q.addEventListener("click", () => {
                         const active = ans.classList.toggle("active");
-                        btn.textContent = active ? "−" : "+";
+                        btn.textContent = active ? "Minus" : "Plus";
                         ans.style.display = active ? "block" : "none";
                     });
                 }
             });
 
-            // Timeline animation
             const observer = new IntersectionObserver(e => e.forEach(en => en.isIntersecting && en.target.classList.add("visible")), { threshold: .1 });
             timelineItems.forEach(i => observer.observe(i));
 
-            // INTERACTIVE PLAN SECTION
             planSteps.forEach(step => {
                 const header = step.querySelector('.plan-step-header');
                 const content = step.querySelector('.plan-step-content');
@@ -322,23 +320,6 @@
                     }
                 });
             });
-
-            // Newsletter form
-            const form = document.querySelector('#cta form');
-            if (form) {
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    const fd = new FormData(this);
-                    fetch(this.action, { method: 'POST', body: fd })
-                        .then(r => r.text())
-                        .then(() => {
-                            document.getElementById('response').innerHTML = '<p style="color:#ffd700;">Thanks! You’re subscribed.</p>';
-                        })
-                        .catch(() => {
-                            document.getElementById('response').innerHTML = '<p style="color:red;">Error – try again.</p>';
-                        });
-                });
-            }
         });
     </script>
 </head>
@@ -368,7 +349,7 @@
                 <p style="font-size:1.2em;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;word-break:break-word;">
                     Turn innovation potential into operational capability by aligning government, investors, and startups.
                 </p>
-                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Partner%20with%20Alchemy&body=I'm%20interested%20in%20partnering%20with%20Alchemy%20to%20support%20its%20mission.%20Please%20provide%20more%20details."
+                <a href="mailto:alchemy@wildbluehorizons.org?subject=Partner%20with%20Alchemy&body=I'm%20interested%20in%20partnering%20with%20Alchemy%20to%20support%20its%20mission.%20Please%20provide%20more%20details."
                    class="cta-button">Partner with Us</a>
             </section>
 
@@ -382,7 +363,6 @@
             <section id="plan">
                 <h2>The Plan: A Three-Part Process</h2>
                 
-                <!-- VISION STATEMENT ABOVE EXPANSION BOXES -->
                 <div style="max-width: 900px; margin: 0 auto 30px; padding: 20px; background: rgba(255,215,0,0.1); border: 1px solid #ffd700; border-radius: 8px; font-size: 1.1em; line-height: 1.7; color: #fff;">
                     Alchemy envisions a system where the Department of War can see and shape emerging technology trends, where investors can identify the technologies most likely to transition, and where startups can find clear pathways to contribute to the mission. The long-term vision is a connected, data-driven marketplace where insight informs investment, investment drives innovation, and innovation reliably transitions into capability.
                 </div>
@@ -391,7 +371,7 @@
                     <div class="plan-step" tabindex="0">
                         <div class="plan-step-header">
                             <span>Insight</span>
-                            <span class="plan-step-icon">▼</span>
+                            <span class="plan-step-icon">Down Arrow</span>
                         </div>
                         <div class="plan-step-content">
                             <p>Create a data-driven common operating picture of technology areas that matter to both government and industry. Provide decision-makers with clear visibility into where defense demand meets commercial opportunity.</p>
@@ -400,7 +380,7 @@
                     <div class="plan-step" tabindex="0">
                         <div class="plan-step-header">
                             <span>Investment</span>
-                            <span class="plan-step-icon">▼</span>
+                            <span class="plan-step-icon">Down Arrow</span>
                         </div>
                         <div class="plan-step-content">
                             <p>Incentivize performance by combining government demand signals and venture capital to accelerate promising technologies. Develop milestone-based models that reward measurable progress and signal private investment confidence.</p>
@@ -409,7 +389,7 @@
                     <div class="plan-step" tabindex="0">
                         <div class="plan-step-header">
                             <span>Integration</span>
-                            <span class="plan-step-icon">▼</span>
+                            <span class="plan-step-icon">Down Arrow</span>
                         </div>
                         <div class="plan-step-content">
                             <p>Engage acquisition pathways from the start to ensure that successful prototypes can scale to programs of record. Reduce perceived risk by quantifying market strength and technology maturity.</p>
@@ -418,27 +398,26 @@
                 </div>
             </section>
 
-            <!-- CTA / NEWSLETTER -->
+            <!-- CTA / PLATFORM ACCESS -->
             <section id="cta" class="lead-capture">
                 <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
                 <p>Discover how to convert untapped capital into war-winning solutions.</p>
 
-                <form action="https://formsubmit.co/patrick.highland.1@wildbluehorizons.org" method="POST"
-                      style="margin:20px 0;text-align:center;">
-                    <input type="email" name="email" placeholder="Enter your email" required
-                           style="padding:14px 18px;width:300px;max-width:85%;border:2px solid #ffd700;background:#000;color:#fff;font-size:1.1em;border-radius:6px;margin-right:10px;box-shadow:0 0 8px rgba(255,215,0,.3);">
-                    <button type="submit"
-                            style="padding:14px 28px;background:#ffd700;color:#000;border:none;font-weight:bold;font-size:1.1em;border-radius:6px;cursor:pointer;transition:all .3s ease;"
-                            onmouseover="this.style.background='#ffed4e'"
-                            onmouseout="this.style.background='#ffd700'">
-                        Subscribe to the Alchemy Newsletter
-                    </button>
-                    <input type="hidden" name="_subject" value="New Alchemy Newsletter Subscription">
-                    <input type="hidden" name="_autoresponse" value="Thanks for subscribing to the Alchemy Newsletter!">
-                    <input type="hidden" name="_next" value="https://patrickhighland1-maker.github.io/Alchemy.github.io/thanks.html">
-                </form>
+                <div style="margin: 40px 0; text-align: center;">
+                    <a href="https://youtu.be/29Ds2sV8-Yk" target="_blank" class="cta-button" style="margin: 0 15px 20px; display: inline-block; padding: 16px 32px; font-size: 1.2em;">
+                        Watch the Platform Demo
+                    </a>
+                    <a href="platform.html" target="_blank" class="cta-button" style="margin: 0 15px 20px; display: inline-block; padding: 16px 32px; font-size: 1.2em; background: #000; color: #ffd700; border: 2px solid #ffd700;">
+                        Try the Platform Yourself
+                    </a>
+                </div>
 
-                <div id="response" style="min-height:28px;font-size:1em;margin-top:10px;"></div>
+                <p style="font-size: 1em; opacity: 0.9;">
+                    <strong>Want the full Blueprint?</strong> Email us at 
+                    <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20Alchemy%20Blueprint">
+                        alchemy@wildbluehorizons.org
+                    </a>
+                </p>
             </section>
 
             <!-- SUCCESS -->
@@ -448,23 +427,23 @@
                     By connecting data, incentives, and communities across the public and private sectors, Alchemy seeks to turn fragmented innovation into a repeatable national advantage. The end goal is not one successful project—it’s a system that makes success routine.
                 </p>
 
-                <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Take%20Action%20with%20Alchemy&body=I'm%20ready%20to%20take%20action%20with%20Alchemy.%20Please%20provide%20next%20steps%20for%20collaboration."
+                <a href="mailto:alchemy@wildbluehorizons.org?subject=Take%20Action%20with%20Alchemy&body=I'm%20ready%20to%20take%20action%20with%20Alchemy.%20Please%20provide%20next%20steps%20for%20collaboration."
                    class="cta-button" style="margin-top: 40px;">Take Action Now</a>
             </section>
 
-            <!-- TIMELINE – HORIZONTAL -->
+            <!-- TIMELINE -->
             <section id="timeline">
                 <h2>Timeline</h2>
                 <div class="timeline-container">
                     <div class="timeline-item"><div class="timeline-content"><p>Sep 25 – Alchemy approved as Blue Horizons project</p></div></div>
-                    <div class="timeline-item"><div class="timeline-content"><p>Nov 25 – Create marketplace and select test projects</p></div></div>
-                    <div class="timeline-item"><div class="timeline-content"><p>Dec 25 – Startups begin work on prototypes</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>Dec 25 – Create marketplace and select test projects</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>Jan 26 – Startups begin work on prototypes</p></div></div>
                     <div class="timeline-item"><div class="timeline-content"><p>Feb 26 – Venture capital investment and senior leader engagements</p></div></div>
                     <div class="timeline-item"><div class="timeline-content"><p>May 26 – Brief Air Force Chief of Staff on prototype outcomes</p></div></div>
                 </div>
             </section>
 
-            <!-- ABOUT US – BLINQ FOR ALL THREE -->
+            <!-- ABOUT US -->
             <section id="guide">
                 <h2>The Alchemists</h2>
                 <p>
@@ -486,30 +465,30 @@
             <section id="faq">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-item">
-                    <div class="faq-question">How does Alchemy benefit stakeholders?<span class="faq-expand">+</span></div>
+                    <div class="faq-question">How does Alchemy benefit stakeholders?<span class="faq-expand">Plus</span></div>
                     <div class="faq-answer">Stakeholders gain faster acquisition processes, innovative prototypes, and aligned strategies, empowering warfighters and strengthening national security through collaboration.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Who can participate in Alchemy?<span class="faq-expand">+</span></div>
+                    <div class="faq-question">Who can participate in Alchemy?<span class="faq-expand">Plus</span></div>
                     <div class="faq-answer">Everyone!</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">What is the Blueprint about?<span class="faq-expand">+</span></div>
-                    <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles. <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy.">Request the Blueprint</a> to learn more.</div>
+                    <div class="faq-question">What is the Blueprint about?<span class="faq-expand">Plus</span></div>
+                    <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles. <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy.">Request the Blueprint</a> to learn more.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">How can I get involved?<span class="faq-expand">+</span></div>
-                    <div class="faq-answer">Contact us via email at patrick.highland.1@wildbluehorizons.org or <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy.">request the Blueprint</a> to discuss collaboration opportunities.</div>
+                    <div class="faq-question">How can I get involved?<span class="faq-expand">Plus</span></div>
+                    <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy.">request the Blueprint</a> to discuss collaboration opportunities.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">My organization already does something like this... how is Alchemy different?<span class="faq-expand">+</span></div>
+                    <div class="faq-question">My organization already does something like this... how is Alchemy different?<span class="faq-expand">Plus</span></div>
                     <div class="faq-answer">Alchemy stands out by integrating a whole-of-society approach, combining all-source intelligence, venture capital, and government resources into a unified strategy, offering a scalable model tailored to national defense needs unlike traditional isolated efforts.</div>
                 </div>
             </section>
 
             <!-- FOOTER -->
             <footer>
-                <p>© 2025 Alchemy. Vision Venture Victory. <a href="mailto:patrick.highland.1@wildbluehorizons.org?subject=Contact%20Alchemy&body=I'm%20reaching%20out%20to%20learn%20more%20about%20Alchemy.%20Please%20provide%20additional%20information.">Contact Us</a></p>
+                <p>© 2025 Alchemy. Vision Venture Victory. <a href="mailto:alchemy@wildbluehorizons.org?subject=Contact%20Alchemy&body=I'm%20reaching%20out%20to%20learn%20more%20about%20Alchemy.%20Please%20provide%20additional%20information.">Contact Us</a></p>
                 <p class="disclaimer">The views and opinions expressed on this website are those of the authors and do not necessarily reflect the official policy or position of the United States Air Force, the Department of Defense, or the U.S. Government.</p>
             </footer>
 
